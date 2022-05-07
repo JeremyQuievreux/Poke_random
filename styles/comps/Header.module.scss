@@ -1,3 +1,28 @@
+@import '../colors.scss';
+
 .navbar_container {
-    background-color: lightblue;
+    background-color: $secondary;
+    color: $tier;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    border-bottom: 3px solid $primary;
+    .navbar_logo{
+        display: flex;
+        align-items: center;
+        border: 2px solid black;
+        .navbar_icon{
+            margin: 0 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    nav{
+        width: 20%;
+        display: flex;
+        justify-content: space-between;
+        margin-right: 20px;
+    }
 }

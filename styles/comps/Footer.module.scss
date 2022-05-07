@@ -1,0 +1,8 @@
+@import '../colors.scss';
+
+.footer_container{
+    background-color: $secondary;
+    color: $tier;
+    height: 80px;
+    border-top: 3px solid $primary;
+}
