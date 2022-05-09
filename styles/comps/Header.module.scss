@@ -24,5 +24,12 @@
         display: flex;
         justify-content: space-between;
         margin-right: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        a{
+            &:hover{
+                color: $primary_dark;
+            }
+        }
     }
 }

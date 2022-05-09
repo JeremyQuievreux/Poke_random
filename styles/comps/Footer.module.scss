@@ -5,4 +5,12 @@
     color: $tier;
     height: 80px;
     border-top: 3px solid $primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    a{
+        &:hover{
+            color: $primary_dark;
+        }
+    }
 }
