@@ -3,11 +3,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import styles from '../styles/comps/Header.module.scss'
-
+//typage des props
 type HeaderProps = {
   setIsLogModalOpen: (isLogModalOpen: boolean) => void
 }
-
+//component
 const Header = ({setIsLogModalOpen}: HeaderProps) => {
   return (
     <div className={styles.navbar_container}>
