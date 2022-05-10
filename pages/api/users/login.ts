@@ -6,5 +6,8 @@ type Data = {
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-    res.status(200).send({ error: false, message: "requete recue"});
+    const { mail, password } = req.body;
+    console.log(req.body);
+    
+    res.status(200).send({ error: false, message: "user logged" });
 }
