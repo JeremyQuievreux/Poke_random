@@ -11,6 +11,7 @@ interface IPokemon {
     price: number;
     height: number;
     weight: number;
+    rarity: string;
 }
 
 // Schema
@@ -24,6 +25,7 @@ const PokemonSchema = new mongoose.Schema<IPokemon>({
     price: {type: Number, required: true},
     height: {type: Number, required: true},
     weight: {type: Number, required: true},
+    rarity: {type: String, required: true},
 });
 
 // 3. Create a Model.

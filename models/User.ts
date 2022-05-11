@@ -6,7 +6,10 @@ interface IUser {
   mail: string;
   password: string;
   pokeCoin: number;
-  cards: {}[];
+  cardsList: {
+    card: {},
+    quantity: number
+  }[];
 }
 
 // Schema
@@ -15,7 +18,13 @@ const UserSchema = new mongoose.Schema<IUser>({
   mail: { type: String, required: true },
   password: { type: String, required: true },
   pokeCoin: { type: Number, default: 1000 },
-  cards: { type: [{}], default: []},
+  cardsList: { 
+    type: [
+      {
+        card : { type: Object},
+        quantity: { type: Number}
+      }
+    ], default: []},
 });
 
 // 3. Create a Model.
