@@ -1,11 +1,27 @@
-//Base React + Componsant Image de Next.js + Axios
-import React, { useEffect, useState } from 'react'
+//Base React + Componsant Image de Next.js
+import React from 'react'
 import Image from 'next/image'
-import axios from 'axios';
 // Style
 import styles from '../styles/pages/Shop.module.scss'
+//Surcouche TypeScript de Next.js
+import { GetStaticProps } from 'next'
+//Connect DB + Model
+import PokemonModel from '../models/Pokemon'
+import dbConnect from '../utils/dbConnect'
+//Fetch data before render
+export const getStaticProps: GetStaticProps = async () => {
+  dbConnect();
+  
+  const data = await PokemonModel.find({});
 
-//type
+  return {
+    props: {
+      cards: JSON.parse(JSON.stringify(data))
+    }
+  }
+}
+
+//types
 interface IPokemon {
   _id: string;
   gen: number;
@@ -20,16 +36,11 @@ interface IPokemon {
   rarity: string;
 }
 
-const Shop = () => {
-  //State
-  const [cards, setCards] = useState<IPokemon[]>([])
-  //Fetch data before render
-  useEffect(() => {
-    axios.get('/api/cards/getAllCardsFromDB')
-      .then(res => {
-        setCards(res.data.data)
-      })
-  },[])
+interface ShopProps  {
+  cards: IPokemon[]
+}
+
+const Shop = ({cards}: ShopProps) => {
 
   return (
     <div className={styles.shop_container}>
