@@ -35,6 +35,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         rarity
     })
         .then(() => {
-            res.status(200).json({error: false, message: "pokemon created"});
+            res.status(200).send({error: false, message: "pokemon created"});
+        })
+        .catch(err => {
+            res.status(200).send({error: true, message: err.message});
         })
 }

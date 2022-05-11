@@ -42,21 +42,29 @@ const CreateCard = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        axios.post("/api/cards/createCard", cardInfos)
-            .then(res => {console.log(res.data)})
+        axios.post("/api/cards/addCardToDB", cardInfos)
+            .then(res => {
+                if (res.data.error === false) {
+                    setCardInfos({
+                        gen: "", 
+                        dex_number: "", 
+                        name: "", 
+                        type1: "", 
+                        type2: "", 
+                        description: "", 
+                        picURL: "", 
+                        price: "", 
+                        height: "", 
+                        weight: "", 
+                        rarity: ""})
+                    console.log("Card created");
+                } else {
+                    console.log("Card creation failed");
+                    console.log(res.data.message);
+                }
+                }
+            )
 
-        setCardInfos({
-            gen: "", 
-            dex_number: "", 
-            name: "", 
-            type1: "", 
-            type2: "", 
-            description: "", 
-            picURL: "", 
-            price: "", 
-            height: "", 
-            weight: "", 
-            rarity: ""})
     }
 
   return (
