@@ -47,6 +47,7 @@
             font-weight: bold;
             border-style: none;
             border-radius: 5px;
+            cursor: pointer;
             &:hover{
                 color: $primary_dark;
                 background-color: $tier;

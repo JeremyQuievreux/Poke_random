@@ -43,6 +43,7 @@
             font-size: 14px;
             font-weight: bold;
             margin: 10px auto;
+            cursor: pointer;
             &:hover{
                 border: 3px solid $primary_dark;
                 background-color: $tier;
