@@ -69,8 +69,8 @@ const CreateCard = () => {
 
   return (
     <div className={styles.createcard_container}>
-        <h2>Page creation de carte</h2>
         <form onSubmit={handleSubmit}>
+        <h2>Ajouter carte en BDD : </h2>
             <div className={styles.form_line}>
                 <label>Génération :</label>
                 <input 

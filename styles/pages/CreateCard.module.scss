@@ -2,4 +2,52 @@
 
 .createcard_container{
     min-height: calc(100vh - 160px);
+    form{
+        margin: 20px auto;
+        max-width: 500px;
+        border: 2px solid $primary_dark;
+        border-radius: 3px;
+        box-shadow: 0 0 20px  $secondary;
+        display: flex;
+        flex-direction: column;
+        h2{
+            text-align: center;
+            background-color: $primary_dark;
+            color: $tier;
+            padding: 5px 0;
+        }
+        .form_line{
+            margin: 5px 20px;
+            display: flex;
+            flex-direction: column;
+            input, select{
+                height: 30px;
+                padding-left: 10px;
+                &:focus{
+                    outline: 2px solid $primary_dark;
+                    border-radius: 3px;
+                }
+            }
+            label{
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+        }
+        button{
+            width: 50%;
+            background-color: $primary_dark;
+            color: $tier;
+            height: 30px;
+            border-style: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 10px auto;
+            &:hover{
+                border: 3px solid $primary_dark;
+                background-color: $tier;
+                color: $primary_dark;
+            }
+        }
+    }
 }

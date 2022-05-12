@@ -15,7 +15,7 @@ const Header = ({setIsLogModalOpen}: HeaderProps) => {
         <a>
           <div className={styles.navbar_logo}>
             <div className={styles.navbar_icon}>
-              <Image src="/../public/pokeball.png" width={40} height={40} />
+              <Image src="/pokeball.png" width={40} height={40} />
             </div>
             <h1>Pokémon Click'n'Collect</h1>
           </div>
