@@ -29,8 +29,8 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
     }
 
   return (
-    <>
-    <h2>Connection : </h2>
+    <div className={styles.form_container}>
+    <h2>Connection</h2>
     <form onSubmit={handleSubmit}>
         <div className={styles.form_line}>
             <label htmlFor="mail">Adresse mail : </label>
@@ -54,10 +54,10 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
                 onChange={onChangeInput}
                 />
         </div>
-        <button type="submit">Se Connecter</button>
+        <button type="submit">Me Connecter</button>
     </form>
     <p onClick={() => setLoginState('create')}>Je n'ai pas de compte</p>
-    </>
+    </div>
   )
 }
 

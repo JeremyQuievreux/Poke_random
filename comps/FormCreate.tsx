@@ -32,7 +32,7 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
 
   return (
     <div className={styles.form_container}>
-        <h2>Création de compte : </h2>
+        <h2>Création de compte</h2>
         <form onSubmit={handleSubmit}>
             <div className={styles.form_line}>
                 <label htmlFor="pseudo">Pseudo : </label>
@@ -42,6 +42,7 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
                     name="pseudo"
                     value={user.pseudo}
                     onChange={onChangeInput}
+                    placeholder="ex : The_Collector"
                     />
             </div>
             <div className={styles.form_line}>
@@ -52,6 +53,7 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
                     name="mail"
                     value={user.mail}
                     onChange={onChangeInput}
+                    placeholder="ex : monmail@domaine.com"
                     />
             </div>
             <div className={styles.form_line}>
@@ -62,6 +64,7 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
                     id="mailConfirm"
                     value={user.mailConfirm}
                     onChange={onChangeInput}
+                    placeholder="ex : monmail@domaine.com"
                     />
             </div>
             <div className={styles.form_line}>
@@ -71,10 +74,11 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
                     name="password" 
                     id="password"
                     value={user.password}
-                    onChange={onChangeInput} 
+                    onChange={onChangeInput}
+                    placeholder="*******"
                     />
             </div>
-            <button type="submit">Créer Compte</button>
+            <button type="submit">Créer mon compte</button>
         </form>
         <p onClick={() => setLoginState("login")}>J'ai deja un compte</p>
     </div>
