@@ -31,7 +31,7 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
     }
 
   return (
-    <>
+    <div className={styles.form_container}>
         <h2>Création de compte : </h2>
         <form onSubmit={handleSubmit}>
             <div className={styles.form_line}>
@@ -77,7 +77,7 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
             <button type="submit">Créer Compte</button>
         </form>
         <p onClick={() => setLoginState("login")}>J'ai deja un compte</p>
-    </>
+    </div>
   )
 }
 
