@@ -13,22 +13,42 @@ type Data = {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
-    const { pseudo, mail, password } = req.body;
+    const { pseudo, mail, mailConfirm, password } = req.body;
 
-    const hashPassword = bcrypt.hashSync(password, salt)
+    /* if (pseudo === " " || mail === " " || password === " " || mailConfirm === " ") {
+        res.status(200).send({error: true, message: "Veuillez remplir tous les champs"})
+    } */
+    //verifie que les mails sont identiques
+    if (mail !== mailConfirm) {
+        res.status(200).send({error: true, message: "Les mails ne correspondent pas"})
+    } else {
+        
+        dbConnect()
 
-    /* dbConnect()
-
-    UserModel.create({
-        pseudo,
-        mail,
-        password: hashPassword,
-    })
-        .then(() => {
-            res.status(200).json({error: false, message: "User created"});
+        //verifie que le pseudo n'existe pas déjà
+        UserModel.findOne({ pseudo: pseudo }, (err: string, user :{}) => {
+            if (user === null) {
+                //verifie que le mail n'existe pas déjà
+                UserModel.findOne({ mail: mail }, (err: string, user: {}) => {
+                    if (user === null){
+                        //hashage du mot de passe
+                        const hashPassword = bcrypt.hashSync(password, salt)
+                        //création du nouvel utilisateur
+                        UserModel.create({
+                            pseudo,
+                            mail,
+                            password: hashPassword,
+                        })
+                        .then(() => {
+                            res.status(200).json({error: false, message: "User created"});
+                        })
+                    } else {
+                        res.status(200).send({error: true, message: "Ce mail est déjà utilisé"})
+                    }
+                })
+            } else {
+                res.status(200).send({error: true, message: "Ce pseudo existe déjà"})
+            }
         })
-    console.log(req.body); */
-    
-    res.status(200).json({error: false, message: "User created"});
-    //res.status(200).json({error: false, message: "User created"});
+    }
 }

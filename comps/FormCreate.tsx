@@ -26,10 +26,14 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         axios.post("/api/users/createAccount", user)
-            .then(res => {console.log(res.data)})
-        setUser({pseudo: "", mail: "", mailConfirm: "", password: ""})
-    }
-
+            .then(res => {
+                if(res.data.error === false){
+                    setUser({pseudo: "", mail: "", mailConfirm: "", password: ""})
+                } else {
+                    console.log(res.data.message);
+                }
+            })
+        }
   return (
     <div className={styles.form_container}>
         <h2>Création de compte</h2>
@@ -43,17 +47,19 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
                     value={user.pseudo}
                     onChange={onChangeInput}
                     placeholder="ex : The_Collector"
+                    required
                     />
             </div>
             <div className={styles.form_line}>
                 <label htmlFor="mail">Adresse mail : </label>
                 <input 
-                    type="text" 
+                    type="mail" 
                     id="mail" 
                     name="mail"
                     value={user.mail}
                     onChange={onChangeInput}
                     placeholder="ex : monmail@domaine.com"
+                    required
                     />
             </div>
             <div className={styles.form_line}>
@@ -65,6 +71,7 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
                     value={user.mailConfirm}
                     onChange={onChangeInput}
                     placeholder="ex : monmail@domaine.com"
+                    required
                     />
             </div>
             <div className={styles.form_line}>
@@ -76,6 +83,7 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
                     value={user.password}
                     onChange={onChangeInput}
                     placeholder="*******"
+                    required
                     />
             </div>
             <button type="submit">Créer mon compte</button>
