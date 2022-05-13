@@ -1,0 +1,58 @@
+@import "../colors.scss";
+
+.card_container{
+    width: 250px;
+    border: 2px solid black;
+    border-radius: 0 25px 0 25px;
+    margin: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.500);
+    transition: box-shadow, scale 0.8s;
+    &:hover{
+        scale: 1.25;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+    }
+    .card_header{
+        height: 40px;
+        border-bottom: 2px solid black;
+        border-radius: 0 23px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+    }
+    .card_body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 250px;
+        background-color: $tier;
+    }
+    .card_typeline{
+        height: 40px;
+        border-top: 2px solid black;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: $tier;
+        .type_square{
+            border: 2px solid black;
+            border-radius: 12px;
+            height: 24px;
+            width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 3px;
+        }
+    }
+    .card_footer{
+        display: flex;
+        border-top: 2px solid black;
+        border-radius: 0 0 0 23px;
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+    }
+}

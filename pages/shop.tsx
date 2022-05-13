@@ -4,6 +4,7 @@ import Image from 'next/image'
 import axios from 'axios';
 // Style
 import styles from '../styles/pages/Shop.module.scss'
+import Card from '../comps/Card';
 
 //type
 interface IPokemon {
@@ -34,14 +35,13 @@ const Shop = () => {
   return (
     <div className={styles.shop_container}>
         <h2>Shop Page</h2>
-        {cards.map((card) => {
-          return (
-            <div key={card._id}>
-              <h3>{card.name}</h3>
-              <Image src={card.picURL} width={200} height={200} />
-            </div>
-          )
-        })}
+        <div className={styles.cards_container}>
+          {cards.map((card) => {
+            return (
+              <Card key={card._id} card={card}/>
+            )
+          })}
+        </div>
     </div>
   )
 }
