@@ -1,13 +1,9 @@
 import { createContext } from 'react';
 
 type CheckStorageContextType = {
-    checkStorage: () => void,
-    userIsLog: boolean,
-    userID: string|null,
+    checkStorageFunction: () => void,
   }
   
   export const CheckStorageContext = createContext<CheckStorageContextType>({
-    checkStorage: () => {},
-    userIsLog: false,
-    userID: null,
+    checkStorageFunction: () => {},
   })

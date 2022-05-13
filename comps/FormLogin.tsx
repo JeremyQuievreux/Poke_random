@@ -1,4 +1,4 @@
-import React , { useState }from 'react'
+import React , { useState, useContext } from 'react'
 import { useRouter } from 'next/router'
 
 import styles from '../styles/comps/FormLogin.module.scss'
@@ -15,14 +15,14 @@ type UserConnect = {
 }
 
 import { ModalContext } from '../context/ModalContext'
-import { CheckStorageContext } from '../context/RefreshContext'
+import { CheckStorageContext } from '../context/CheckStorageContext'
 
 //Component
 const FormLogin = ({setLoginState}: FormLoginProps) => {
-
-    const { setIsLogModalOpen } = React.useContext(ModalContext)
-    const { checkStorage } = React.useContext(CheckStorageContext)
-
+    //Context
+    const { setIsLogModalOpen } = useContext(ModalContext)
+    const { checkStorageFunction } = useContext(CheckStorageContext)
+    //routage
     const router = useRouter()
     //state
     const [ user, setUser ] = useState<UserConnect>({mail: "" , password: ""})
@@ -43,7 +43,7 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
                     router.push({
                         pathname: '/'
                     })
-                    checkStorage()
+                    checkStorageFunction()
                 } else {
                     console.log(res.data.message)
                 }

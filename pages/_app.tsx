@@ -5,25 +5,26 @@ import type { AppProps } from 'next/app'
 import Layout from '../comps/Layout'
 
 import { ModalContext } from '../context/ModalContext'
-
-import { CheckStorageContext } from '../context/RefreshContext'
+import { CheckStorageContext } from '../context/CheckStorageContext'
+import { UserContext } from '../context/UserContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
   
   const [ isLogModalOpen, setIsLogModalOpen ] = useState<boolean>(false)
   const [ userIsLog, setUserIsLog ] = useState<boolean>(false)
-  const [ userID, setUserID ] = useState<string|null>(null)
+  const [ userInfos, setUserInfos ] = useState<{}|null>(null)
 
-  const checkStorage = () => {
+  const checkStorageFunction = () => {
     if(localStorage.getItem('@pkm-cnc')) {
-      console.log("storage ok");
       setUserIsLog(true)
-      setUserID(localStorage.getItem('@pkm-cnc'))
     } else {
-      console.log("storage not ok");
       setUserIsLog(false)
-      setUserID(null)
     }
+  }
+
+  const userContextValue = {
+    userIsLog,
+    userInfos
   }
   
   const modalContextValue = {
@@ -32,16 +33,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
   
   const CheckStorageContextValue = {
-    checkStorage,
-    userIsLog,
-    userID
+    checkStorageFunction
   }
 
   useEffect(() => {
-    checkStorage()
+    checkStorageFunction()
   },[])
 
   return (
+    <UserContext.Provider value={userContextValue}>
     <CheckStorageContext.Provider value={CheckStorageContextValue}>
     <ModalContext.Provider value={modalContextValue}>
       <Layout>
@@ -49,6 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Layout>
     </ModalContext.Provider>
     </CheckStorageContext.Provider>
+    </UserContext.Provider>
   )
 }
 

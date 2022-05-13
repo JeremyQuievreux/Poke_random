@@ -1,17 +1,22 @@
 import React, { useContext } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+
 
 import styles from '../styles/comps/Header.module.scss'
 // Recupere le contexte de ModalContext
 import { ModalContext } from '../context/ModalContext'
-import { CheckStorageContext } from '../context/RefreshContext'
+import { CheckStorageContext } from '../context/CheckStorageContext'
+import { UserContext } from '../context/UserContext'
 
 //component
 const Header = () => {
 
+  const router = useRouter()
   const { setIsLogModalOpen } = useContext(ModalContext)
-  const { userIsLog, checkStorage } = useContext(CheckStorageContext)
+  const { checkStorageFunction } = useContext(CheckStorageContext)
+  const { userIsLog, userInfos } = useContext(UserContext)
 
   return (
     <div className={styles.navbar_container}>
@@ -32,13 +37,21 @@ const Header = () => {
         <Link href={"/shop"}>
           <a>Shop</a>
         </Link>
+        {userIsLog && 
+          <Link href={"/profil"}>
+            <a>Profil</a>
+          </Link>
+        }
         {userIsLog 
         ? 
         <Link href={"/"}>
           <a onClick={(e) => {
             e.preventDefault()
             localStorage.removeItem("@pkm-cnc")
-            checkStorage()
+            checkStorageFunction()
+            router.push({
+              pathname: '/'
+          })
           }}>
             Log Out
           </a>

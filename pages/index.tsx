@@ -3,11 +3,11 @@ import { useContext } from 'react'
 import Head from 'next/head'
 import styles from '../styles/pages/Home.module.scss'
 
-import { CheckStorageContext } from '../context/RefreshContext'
+import { UserContext } from '../context/UserContext'
 
 const Home: NextPage = () => {
 
-  const { userID } = useContext(CheckStorageContext)
+  const { userIsLog } = useContext(UserContext)
 
   return (
     <div className={styles.home_container}>
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/pokeball2.png" />
       </Head>
       <h2>Home</h2>
-      {userID ? <p>Vous êtes connecté</p> : <p>Vous n'êtes pas connecté</p>}     
+      {userIsLog ? <p>Vous êtes connecté</p> : <p>Vous n'êtes pas connecté</p>}     
     </div>
   )
 }
