@@ -10,16 +10,19 @@ import { CheckStorageContext } from '../context/RefreshContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
   
-  const [isLogModalOpen, setIsLogModalOpen] = useState<boolean>(false)
-  const [userIsLog, setUserIsLog] = useState<boolean>(false)
+  const [ isLogModalOpen, setIsLogModalOpen ] = useState<boolean>(false)
+  const [ userIsLog, setUserIsLog ] = useState<boolean>(false)
+  const [ userID, setUserID ] = useState<string|null>(null)
 
   const checkStorage = () => {
     if(localStorage.getItem('@pkm-cnc')) {
       console.log("storage ok");
       setUserIsLog(true)
+      setUserID(localStorage.getItem('@pkm-cnc'))
     } else {
       console.log("storage not ok");
       setUserIsLog(false)
+      setUserID(null)
     }
   }
   
@@ -30,7 +33,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   
   const CheckStorageContextValue = {
     checkStorage,
-    userIsLog
+    userIsLog,
+    userID
   }
 
   useEffect(() => {
