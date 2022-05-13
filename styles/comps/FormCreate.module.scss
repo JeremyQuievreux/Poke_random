@@ -16,7 +16,7 @@
         color: $tier;
     }
     form{
-        margin: 20px 0 ;
+        margin: 60px 0 20px 0 ;
         border: 2px solid $primary_dark;
         border-radius: 3px;
         width: 50%;
@@ -55,6 +55,26 @@
                 border: 2px solid $primary_dark;
             }
         }
+    }
+    .messageBox{
+        width: 50%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+        border-radius: 3px;
+        position: absolute;
+        top: 55px;
+        p{
+            font-weight: initial;
+        }
+    }
+    .error{
+        background-color: pink;
+    }
+    .success{
+        background-color: lightgreen;
     }
     p{
         cursor: pointer;

@@ -18,6 +18,8 @@ type UserCreate = {
 const FormCreate = ({setLoginState}: FormCreateProps) => {
     //state
     const [ user, setUser ] = useState<UserCreate>({pseudo: "", mail: "", mailConfirm: "", password: ""})
+    const [ errorMessage, setErrorMessage] = useState<string|null>(null)
+    const [ successMessage, setSuccessMessage] = useState<string|null>(null)
     //methode pour update le state onChange des inputs
     const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({...user, [e.target.name]: e.target.value})
@@ -28,9 +30,17 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
         axios.post("/api/users/createAccount", user)
             .then(res => {
                 if(res.data.error === false){
+                    setSuccessMessage(res.data.message)
                     setUser({pseudo: "", mail: "", mailConfirm: "", password: ""})
+                    setTimeout(() => {
+                        setSuccessMessage(null)
+                        setLoginState("login")
+                    }, 3000)
                 } else {
-                    console.log(res.data.message);
+                    setErrorMessage(res.data.message)
+                    setTimeout(() => {
+                        setErrorMessage(null)
+                    } , 3000)
                 }
             })
         }
@@ -89,6 +99,16 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
             <button type="submit">Créer mon compte</button>
         </form>
         <p onClick={() => setLoginState("login")}>J'ai deja un compte</p>
+        {errorMessage && 
+            <div className={`${styles.messageBox} ${styles.error}`}>
+                {errorMessage}
+            </div>
+        }
+        {successMessage && 
+            <div className={`${styles.messageBox} ${styles.success}`}>
+                {successMessage}
+            </div>
+        }
     </div>
   )
 }

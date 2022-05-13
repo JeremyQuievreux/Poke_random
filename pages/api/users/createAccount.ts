@@ -40,7 +40,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
                             password: hashPassword,
                         })
                         .then(() => {
-                            res.status(200).json({error: false, message: "User created"});
+                            res.status(200).json({error: false, message: "Votre compte a bien été créé"});
                         })
                     } else {
                         res.status(200).send({error: true, message: "Ce mail est déjà utilisé"})
