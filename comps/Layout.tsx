@@ -1,4 +1,4 @@
-import React from 'react'
+import React , { useContext } from 'react'
 import Footer from './Footer'
 
 import Header from './Header'
@@ -6,19 +6,22 @@ import LogModal from './LogModal'
 //typage des props
 type LayoutProps = {
     children: React.ReactNode,
-    isLogModalOpen: boolean,
-    setIsLogModalOpen: (isLogModalOpen: boolean) => void
 }
+//Recupere le contexte de ModalContext
+import { ModalContext } from '../context/ModalContext'
 //component
-const Layout = ({children, isLogModalOpen, setIsLogModalOpen}: LayoutProps) => {
-  return (
-      <div className='main-container'>
-          <Header setIsLogModalOpen={setIsLogModalOpen}/>
-          { children }
-          {isLogModalOpen && <LogModal setIsLogModalOpen={setIsLogModalOpen}/>}
-          <Footer />
-      </div>
-  )
+const Layout = ({children}: LayoutProps) => {
+
+    const { isLogModalOpen } = useContext(ModalContext)
+
+    return (
+        <div className='main-container'>
+            <Header />
+            { children }
+            {isLogModalOpen && <LogModal/>}
+            <Footer />
+        </div>
+    )
 }
 
 export default Layout

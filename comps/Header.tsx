@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
 import styles from '../styles/comps/Header.module.scss'
-//typage des props
-type HeaderProps = {
-  setIsLogModalOpen: (isLogModalOpen: boolean) => void
-}
+// Recupere le contexte de ModalContext
+import { ModalContext } from '../context/ModalContext'
 //component
-const Header = ({setIsLogModalOpen}: HeaderProps) => {
+const Header = () => {
+
+  const { setIsLogModalOpen } = useContext(ModalContext)
+
   return (
     <div className={styles.navbar_container}>
       <Link href="/">

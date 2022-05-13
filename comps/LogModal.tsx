@@ -1,14 +1,15 @@
-import React , { useState }from 'react'
+import React , { useState, useContext }from 'react'
 
 import styles from '../styles/comps/LogModal.module.scss'
 import FormCreate from './FormCreate'
 import FormLogin from './FormLogin'
-//typage des props
-type LogModalProps = {
-    setIsLogModalOpen: (isLogModalOpen: boolean) => void
-}
+//Recupere le contexte de ModalContext
+import { ModalContext } from '../context/ModalContext'
 //component
-const LogModal = ({setIsLogModalOpen}: LogModalProps) => {
+const LogModal = () => {
+
+  const { setIsLogModalOpen } = useContext(ModalContext)
+
   //state
   const [ loginState, setLoginState ] = useState<"login"|"create">("login")
 
