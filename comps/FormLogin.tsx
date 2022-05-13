@@ -1,4 +1,5 @@
 import React , { useState }from 'react'
+import { useRouter } from 'next/router'
 
 import styles from '../styles/comps/FormLogin.module.scss'
 
@@ -12,8 +13,15 @@ type UserConnect = {
     mail: string,
     password: string
 }
+
+import { ModalContext } from '../context/ModalContext'
+
 //Component
 const FormLogin = ({setLoginState}: FormLoginProps) => {
+
+    const { setIsLogModalOpen } = React.useContext(ModalContext)
+
+    const router = useRouter()
     //state
     const [ user, setUser ] = useState<UserConnect>({mail: "" , password: ""})
     //methode pour update le state onChange des inputs
@@ -24,8 +32,19 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         axios.post("/api/users/login", user)
-            .then(res => {console.log(res.data.message, res.data.data)})
-        setUser({mail: "", password: ""})
+            .then(res => {
+                console.log(res.data.message, res.data.data)
+                if(res.data.error === false){
+                    localStorage.setItem("@pkm-cnc",res.data.data)
+                    setUser({mail: "", password: ""})
+                    setIsLogModalOpen(false)
+                    router.push({
+                        pathname: '/'
+                    });
+                } else {
+                    console.log(res.data.message)
+                }
+            })
     }
 
   return (
