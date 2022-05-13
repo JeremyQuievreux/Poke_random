@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/pokeball2.png" />
       </Head>
       <h2>Home</h2>
-      {userIsLog ? <p>Vous êtes connecté</p> : <p>Vous n'êtes pas connecté</p>}     
+      {userIsLog ? <p>Vous êtes connecté</p> : <p>Vous êtes pas connecté</p>}     
     </div>
   )
 }
