@@ -15,11 +15,13 @@ type UserConnect = {
 }
 
 import { ModalContext } from '../context/ModalContext'
+import { CheckStorageContext } from '../context/RefreshContext'
 
 //Component
 const FormLogin = ({setLoginState}: FormLoginProps) => {
 
     const { setIsLogModalOpen } = React.useContext(ModalContext)
+    const { checkStorage } = React.useContext(CheckStorageContext)
 
     const router = useRouter()
     //state
@@ -40,7 +42,8 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
                     setIsLogModalOpen(false)
                     router.push({
                         pathname: '/'
-                    });
+                    })
+                    checkStorage()
                 } else {
                     console.log(res.data.message)
                 }

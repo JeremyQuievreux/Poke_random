@@ -5,10 +5,13 @@ import Image from 'next/image'
 import styles from '../styles/comps/Header.module.scss'
 // Recupere le contexte de ModalContext
 import { ModalContext } from '../context/ModalContext'
+import { CheckStorageContext } from '../context/RefreshContext'
+
 //component
 const Header = () => {
 
   const { setIsLogModalOpen } = useContext(ModalContext)
+  const { userIsLog, checkStorage } = useContext(CheckStorageContext)
 
   return (
     <div className={styles.navbar_container}>
@@ -29,11 +32,24 @@ const Header = () => {
         <Link href={"/shop"}>
           <a>Shop</a>
         </Link>
+        {userIsLog 
+        ? 
         <Link href={"/"}>
-          <a onClick={(e) => {e.preventDefault(),setIsLogModalOpen(true)}}>
-            Se Connecter
+          <a onClick={(e) => {
+            e.preventDefault()
+            localStorage.removeItem("@pkm-cnc")
+            checkStorage()
+          }}>
+            Log Out
           </a>
+        </Link> 
+        :
+        <Link href={"/"}>
+        <a onClick={(e) => {e.preventDefault(),setIsLogModalOpen(true)}}>
+          Se Connecter
+        </a>
         </Link>
+        }
       </nav>
     </div>
   )
