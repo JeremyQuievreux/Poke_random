@@ -24,7 +24,7 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         axios.post("/api/users/login", user)
-            .then(res => {console.log(res.data)})
+            .then(res => {console.log(res.data.message, res.data.data)})
         setUser({mail: "", password: ""})
     }
 

@@ -43,7 +43,7 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
                     } , 3000)
                 }
             })
-        }
+    }
   return (
     <div className={styles.form_container}>
         <h2>Création de compte</h2>

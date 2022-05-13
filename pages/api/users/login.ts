@@ -1,13 +1,33 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import dbConnect from '../../../utils/dbConnect'
+import UserModel from '../../../models/User'
+
+const bcrypt = require('bcrypt');
+
 type Data = {
     error: boolean,
     message: string,
+    data?: string
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     const { mail, password } = req.body;
-    console.log(req.body);
-    
-    res.status(200).send({ error: false, message: "user logged" });
+
+    dbConnect()
+
+    UserModel.findOne({ mail: mail }, (err: string, user: {password : string, _id: string}) => {
+        if (user === null) {
+            res.status(200).send({error: true, message: "Ce mail n'existe pas"})
+        } else {
+            const hashPassword = user.password
+            const comparePassword = bcrypt.compareSync(password, hashPassword)
+            if (comparePassword) {
+                res.status(200).send({error: false, message: "Vous êtes connecté", data: user._id})
+            } else {
+                res.status(200).send({error: true, message: "Mot de passe incorrect"})
+            }
+        }
+    }
+    )
 }
