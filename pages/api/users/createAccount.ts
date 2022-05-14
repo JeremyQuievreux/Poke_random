@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import dbConnect from '../../../utils/dbConnect'
-import {UserModel} from '../../../models/User'
+import UserModel from '../../../models/User'
 
 const bcrypt = require('bcrypt');
 const salt = 10
