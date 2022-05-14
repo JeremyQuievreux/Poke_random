@@ -43,11 +43,11 @@ const Shop = () => {
       </Head>
         <h2>Shop Page</h2>
         <div className={styles.cards_container}>
-          {cards.map((card) => {
+          {cards ? cards.map((card) => {
             return (
               <Card key={card._id} card={card}/>
             )
-          })}
+          }) : <p>Loading...</p>}
         </div>
     </div>
   )
