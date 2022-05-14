@@ -26,11 +26,13 @@ interface IPokemon {
 const Shop = () => {
   //State
   const [cards, setCards] = useState<IPokemon[]>([])
+  const [loading, setLoading] = useState(true)
   //Fetch data before render
   useEffect(() => {
     axios.get('/api/cards/getAllCardsFromDB')
       .then(res => {
         setCards(res.data.data)
+        setLoading(false)
       })
   },[])
 
@@ -43,11 +45,11 @@ const Shop = () => {
       </Head>
         <h2>Shop Page</h2>
         <div className={styles.cards_container}>
-          {cards ? cards.map((card) => {
+          {!loading ? cards.map((card) => {
             return (
               <Card key={card._id} card={card}/>
             )
-          }) : <p>Loading...</p>}
+          }) : <p>Chargement des cartes ...</p>}
         </div>
     </div>
   )
