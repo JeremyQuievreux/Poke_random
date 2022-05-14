@@ -7,6 +7,7 @@ import Layout from '../comps/Layout'
 import { ModalContext } from '../context/ModalContext'
 import { CheckStorageContext } from '../context/CheckStorageContext'
 import { UserContext } from '../context/UserContext'
+import axios from 'axios'
 
 function MyApp({ Component, pageProps }: AppProps) {
   
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const checkStorageFunction = () => {
     if(localStorage.getItem('@pkm-cnc')) {
       setUserIsLog(true)
+
     } else {
       setUserIsLog(false)
     }

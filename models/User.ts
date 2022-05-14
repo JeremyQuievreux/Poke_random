@@ -5,6 +5,7 @@ interface IUser {
   pseudo: string;
   mail: string;
   password: string;
+  isAdmin: boolean;
   pokeCoin: number;
   cardsList: {
     card: {},
@@ -17,6 +18,7 @@ const UserSchema = new mongoose.Schema<IUser>({
   pseudo: { type: String, required: true },
   mail: { type: String, required: true },
   password: { type: String, required: true },
+  isAdmin: { type: Boolean, default: false },
   pokeCoin: { type: Number, default: 1000 },
   cardsList: { 
     type: [
