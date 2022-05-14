@@ -35,7 +35,7 @@ const Header = () => {
           <a>Accueil</a>
         </Link>
         <Link href={"/shop"}>
-          <a>Shop</a>
+          <a>Boutique</a>
         </Link>
         {userIsLog && 
           <Link href={"/profil"}>

@@ -26,6 +26,7 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
     const router = useRouter()
     //state
     const [ user, setUser ] = useState<UserConnect>({mail: "" , password: ""})
+    const [ errorMessage, setErrorMessage] = useState<string|null>(null)
     //methode pour update le state onChange des inputs
     const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUser({...user, [event.target.name]: event.target.value})
@@ -45,7 +46,10 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
                     })
                     checkStorageFunction()
                 } else {
-                    console.log(res.data.message)
+                    setErrorMessage(res.data.message)
+                    setTimeout(() => {
+                        setErrorMessage(null)
+                    } , 3000)
                 }
             })
     }
@@ -79,6 +83,11 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
         <button type="submit">Me Connecter</button>
     </form>
     <p onClick={() => setLoginState('create')}>Je n'ai pas de compte</p>
+    {errorMessage && 
+            <div className={`${styles.messageBox} ${styles.error}`}>
+                {errorMessage}
+            </div>
+        }
     </div>
   )
 }
