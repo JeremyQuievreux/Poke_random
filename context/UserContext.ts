@@ -6,9 +6,9 @@ type UserContextType = {
 }
 
 type UserInfosType = {
-    id: string,
+    _id: string | any,
     mail: string,
-    pseudo: string,
+    pseudo: string ,
     isAdmin: boolean,
     pokeCoin: number,
     cardsList:{}[]

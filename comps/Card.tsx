@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Image from 'next/image';
 
 import styles from '../styles/comps/Card.module.scss'
 
 import { setBGColor } from '../utils/BGColorFunction';
+
+import { UserContext } from '../context/UserContext';
 
 type IPokemon = {
     _id: string;
@@ -25,7 +27,14 @@ type CardComponantProps = {
 
 const Card = ({card}:CardComponantProps) => {
 
+    const { userInfos } = useContext(UserContext);
+
     const type = card.type[0]
+
+    const buycard = (cardID: string, userID: string) =>  {
+        console.log("card id : " + cardID + " userID : " + userID);
+        
+    }
 
   return (
       <div className={styles.card_main_container}>
@@ -53,7 +62,7 @@ const Card = ({card}:CardComponantProps) => {
         </div>
         <div className={styles.buy_line}>
             <p>{card.price} PkC</p>
-            <button>Acheter</button>
+            <button onClick={() => buycard(card.name, userInfos?._id)}>Acheter</button>
         </div>
     </div>
   )
