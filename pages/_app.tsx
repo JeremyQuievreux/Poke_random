@@ -11,7 +11,7 @@ import axios from 'axios'
 
 type UserInfosType = {
   id: string,
-  email: string,
+  mail: string,
   pseudo: string,
   isAdmin: boolean,
   pokeCoin: number,
