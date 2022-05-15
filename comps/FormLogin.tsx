@@ -36,7 +36,6 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
         e.preventDefault()
         axios.post("/api/users/login", user)
             .then(res => {
-                console.log(res.data.message, res.data.data)
                 if(res.data.error === false){
                     localStorage.setItem("@pkm-cnc",res.data.data)
                     setUser({mail: "", password: ""})
