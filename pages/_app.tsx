@@ -9,20 +9,47 @@ import { CheckStorageContext } from '../context/CheckStorageContext'
 import { UserContext } from '../context/UserContext'
 import axios from 'axios'
 
+type UserInfosType = {
+  id: string,
+  email: string,
+  pseudo: string,
+  isAdmin: boolean,
+  pokeCoin: number,
+  cardsList:{}[]
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   
   const [ isLogModalOpen, setIsLogModalOpen ] = useState<boolean>(false)
   const [ userIsLog, setUserIsLog ] = useState<boolean>(false)
-  const [ userInfos, setUserInfos ] = useState<{}|null>(null)
+  const [ userInfos, setUserInfos ] = useState<UserInfosType|null>(null)
+
+  const getUserInfos = (IDtoken: string) => {
+    axios.get('/api/users/getUserInfos', {
+      headers: {
+        'Authorization': `Bearer ${IDtoken}`
+      }
+    })
+    .then(res => {
+      if(res.data.error === true){
+        setUserIsLog(false)
+        setUserInfos(null)
+      } else {
+        setUserIsLog(true)
+        setUserInfos(res.data.data);
+      }
+    })
+  }
 
   const checkStorageFunction = () => {
-    if(localStorage.getItem('@pkm-cnc')) {
-      setUserIsLog(true)
-
+    const localToken = localStorage.getItem('@pkm-cnc')
+    if(localToken) {
+      getUserInfos(localToken)
     } else {
       setUserIsLog(false)
     }
   }
+
 
   const userContextValue = {
     userIsLog,
