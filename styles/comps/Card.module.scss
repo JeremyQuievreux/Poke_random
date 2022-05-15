@@ -6,9 +6,9 @@
     border-radius: 0 25px 0 25px;
     margin: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.500);
-    transition: box-shadow, scale 0.8s;
+    transition: box-shadow, transform 0.8s;
     &:hover{
-        scale: 1.25;
+        transform: scale(1.25);
         box-shadow: 0 0 20px rgba(0, 0, 0, 1);
     }
     .card_header{
