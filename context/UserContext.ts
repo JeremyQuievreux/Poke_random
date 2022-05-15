@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 type UserContextType = {
     userIsLog: boolean,
-    userInfos:UserInfosType|null
+    userInfos:UserInfosType | null,
 }
 
 type UserInfosType = {
@@ -16,5 +16,5 @@ type UserInfosType = {
 
 export const UserContext = createContext<UserContextType>({
     userIsLog: false,
-    userInfos: null
+    userInfos: {_id: "", mail: "", pseudo: "", isAdmin: false, pokeCoin: 0, cardsList: []}
 })
