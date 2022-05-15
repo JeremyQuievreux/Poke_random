@@ -4,6 +4,7 @@ import dbConnect from '../../../utils/dbConnect'
 import UserModel from '../../../models/User'
 
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 type Data = {
     error: boolean,
@@ -23,7 +24,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
             const hashPassword = user.password
             const comparePassword = bcrypt.compareSync(password, hashPassword)
             if (comparePassword) {
-                res.status(200).send({error: false, message: "Vous êtes connecté", data: user._id})
+                const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' })
+                res.status(200).send({error: false, message: "Vous êtes connecté", data: token})
             } else {
                 res.status(200).send({error: true, message: "Mot de passe incorrect"})
             }
