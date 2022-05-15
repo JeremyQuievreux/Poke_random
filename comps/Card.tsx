@@ -7,22 +7,10 @@ import { setBGColor } from '../utils/BGColorFunction';
 
 import { UserContext } from '../context/UserContext';
 
-type IPokemon = {
-    _id: string;
-    gen: number;
-    dex_number: number;
-    name: string;
-    type: string[];
-    description: string;
-    picURL: string;
-    price: number;
-    height: number;
-    weight: number;
-    rarity: string;
-  }
+import { PokemonType } from '../types/PokemonType';
 
 type CardComponantProps = {
-    card: IPokemon
+    card: PokemonType
 }
 
 const Card = ({card}:CardComponantProps) => {
@@ -33,7 +21,7 @@ const Card = ({card}:CardComponantProps) => {
 
     const buycard = (cardID: string, userID: string) =>  {
         console.log("card id : " + cardID + " userID : " + userID);
-        
+
     }
 
   return (
