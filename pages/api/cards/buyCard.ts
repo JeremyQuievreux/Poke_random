@@ -50,8 +50,18 @@ export default function handler(req: NextApiRequest,res: NextApiResponse<Data>) 
               newCardsList[index].quantity += 1
               }
               UserModel.updateOne({_id: userID}, {cardsList: newCardsList, pokeCoin: newPokeCoin}, (err: any) => {
-              res.status(200).send({error: false, message: "Card added to your cart"})          
+                if (!err) {
+                  TransactionModel.create({
+                    user: userID,
+                    style: "buy",
+                    card: cardID
+                  })
+                  .then(() => {
+                    res.status(200).send({error: false, message: "Card added to your cart"})          
+                  })
+                }
               })
+
             } else {
               console.log("pas assez de pokecoin");
               res.status(200).send({error: true, message: "not enouth pokecoin"})
