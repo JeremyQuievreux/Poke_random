@@ -4,13 +4,15 @@ import Image from 'next/image';
 import styles from '../styles/comps/Card.module.scss'
 
 import { setBGColor } from '../utils/BGColorFunction';
+import { setPKBColor } from '../utils/PKBColor';
 
 import { UserContext } from '../context/UserContext';
 import { BuyCardModalContext } from '../context/BuyCardModalContext';
 
 import { PokemonType } from '../types/PokemonType';
-import { BsCoin } from "react-icons/bs";
 
+import { BsCoin } from "react-icons/bs";
+import { MdCatchingPokemon } from "react-icons/md";
 
 type CardComponantProps = {
     card: PokemonType,
@@ -33,6 +35,7 @@ const Card = ({card}:CardComponantProps) => {
                     <p>{card.name}</p>
                 </div>
                 <div className={styles.card_body}>
+                    <MdCatchingPokemon className={styles.rarity_icon} style={{color: setPKBColor(card.rarity)}}/>
                     <img src={card.picURL} width={200} height={200} />
                 </div>
                 <div className={styles.card_typeline}>
