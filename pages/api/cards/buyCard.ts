@@ -17,11 +17,11 @@ interface IUser {
       isAdmin: boolean;
       pokeCoin: number;
       cardsList: test[]
-    }
-    type test = {
-      card: string,
-      quantity: number,
-    }
+}
+type test = {
+  card: string,
+  quantity: number,
+}
 export default function handler(req: NextApiRequest,res: NextApiResponse<Data>) {
     const {cardID, userID} = req.body
 
