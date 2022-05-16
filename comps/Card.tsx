@@ -9,6 +9,8 @@ import { UserContext } from '../context/UserContext';
 import { BuyCardModalContext } from '../context/BuyCardModalContext';
 
 import { PokemonType } from '../types/PokemonType';
+import { BsCoin } from "react-icons/bs";
+
 
 type CardComponantProps = {
     card: PokemonType,
@@ -41,13 +43,13 @@ const Card = ({card}:CardComponantProps) => {
                     })}
                 </div>
                 <div className={styles.card_footer} style={{backgroundColor: setBGColor(type)}}>
-                    <p>Taille : {card.height / 100} m </p>
-                    <p>Poids : {card.weight / 1000} Kg</p>
+                    <p><span className={styles.infos}>Taille : </span>{card.height / 100} m </p>
+                    <p><span className={styles.infos}>Poids : </span>{card.weight / 1000} Kg</p>
                 </div>
             </div>
         </div>
         <div className={styles.buy_line}>
-            <p>{card.price} PkC</p>
+            <p>{card.price} <BsCoin/></p>
             <button onClick={() => {
                 setShowBuyCardModal(true)
                 setBuyCardModalInfos({cardID: card._id, cardName: card.name, cardPrice: card.price, userID: userInfos?._id, userCoin: userInfos?.pokeCoin})

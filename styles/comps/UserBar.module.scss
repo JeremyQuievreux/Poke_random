@@ -1,11 +1,25 @@
 @import '../colors.scss';
 
 .userbar_container{
-    height: 30px;
     background-color: rgba(128, 128, 128, 0.521);
     border-bottom: 3px solid $primary;
     display: flex;
     justify-content: space-around;
     align-items: center;
     font-weight: bold;
+    p{
+        display: flex;
+        align-items: center;
+        .ball_icon{
+            color: $primary_dark;
+        }
+        .coin_icon{
+            color: gold;
+        }
+        svg{
+            margin: 5px;
+            height: 25px;
+            width: 25px;
+        }
+    }
 }

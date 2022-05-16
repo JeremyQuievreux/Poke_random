@@ -35,7 +35,7 @@ const BuyCardModal = () => {
                             <h2>Confirmation achat</h2>
                         </div>
                         <div className={styles.modal_body}>
-                            <p>Voulez vous acheter cette la carte de {buyCardModalInfos.cardName} ?</p>
+                            <p>Voulez vous acheter cette carte de {buyCardModalInfos.cardName} ?</p>
                         </div>
                         <div className={styles.modal_footer}>
                             <button onClick={() => {
