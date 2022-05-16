@@ -7,10 +7,10 @@ interface IUser {
   password: string;
   isAdmin: boolean;
   pokeCoin: number;
-  cardsList: test[]
+  cardsList: CardType[]
 }
 
-type test = {
+type CardType = {
   card: string,
   quantity: number,
 }

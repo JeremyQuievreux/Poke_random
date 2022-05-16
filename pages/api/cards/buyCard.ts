@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import PokemonModel from '../../../models/Pokemon'
 import UserModel from '../../../models/User'
+import TransactionModel from '../../../models/Transaction'
 import dbConnect from '../../../utils/dbConnect'
 
 type Data = {
