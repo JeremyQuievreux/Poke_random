@@ -1,7 +1,7 @@
 @import '../colors.scss';
 
 .logModal_externe{
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 100vw;
     height: 100vh;
@@ -9,6 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 5;
     .logModal_interne{
         position: relative;
         width: 50%;

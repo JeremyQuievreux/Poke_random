@@ -65,7 +65,7 @@ const BuyCardModal = () => {
                         <h2>Connection requise</h2>
                     </div>
                     <div className={styles.modal_body}>
-                        <p>Vous devez être connecté pour acheter une carte</p>
+                        <p>Vous devez être connecté ou créer un compte pour acheter cette carte</p>
                     </div>
                     <div className={styles.modal_footer}>
                         <button onClick={() => {
