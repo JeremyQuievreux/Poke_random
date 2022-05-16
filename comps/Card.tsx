@@ -57,7 +57,7 @@ const Card = ({card}:CardComponantProps) => {
         </div>
         <div className={styles.buy_line}>
             <p>{card.price} PkC</p>
-            <button onClick={() => buycard(card._id, userInfos._id)}>Acheter</button>
+            <button onClick={() => buycard(card._id, userInfos?._id)}>Acheter</button>
         </div>
     </div>
   )
