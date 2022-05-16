@@ -9,13 +9,18 @@ import { CheckStorageContext } from '../context/CheckStorageContext'
 import { UserContext } from '../context/UserContext'
 import axios from 'axios'
 
+type CardType = {
+  card: string,
+  quantity: number
+}
+
 type UserInfosType = {
-  id: string,
+  _id: string | any,
   mail: string,
-  pseudo: string,
+  pseudo: string ,
   isAdmin: boolean,
   pokeCoin: number,
-  cardsList:{}[]
+  cardsList: CardType[]
 }
 
 function MyApp({ Component, pageProps }: AppProps) {

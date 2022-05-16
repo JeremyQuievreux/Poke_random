@@ -2,7 +2,12 @@ import { createContext } from 'react';
 
 type UserContextType = {
     userIsLog: boolean,
-    userInfos:UserInfosType,
+    userInfos:UserInfosType | null
+}
+
+type CardType = {
+    card: string,
+    quantity: number
 }
 
 type UserInfosType = {
@@ -11,10 +16,10 @@ type UserInfosType = {
     pseudo: string ,
     isAdmin: boolean,
     pokeCoin: number,
-    cardsList:{}[]
+    cardsList: CardType[]
 }
 
 export const UserContext = createContext<UserContextType>({
     userIsLog: false,
-    userInfos: {_id: "", mail: "", pseudo: "", isAdmin: false, pokeCoin: 0, cardsList: []}
+    userInfos: null
 })
