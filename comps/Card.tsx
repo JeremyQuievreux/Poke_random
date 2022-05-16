@@ -6,24 +6,21 @@ import styles from '../styles/comps/Card.module.scss'
 import { setBGColor } from '../utils/BGColorFunction';
 
 import { UserContext } from '../context/UserContext';
+import { BuyCardModalContext } from '../context/BuyCardModalContext';
 
 import { PokemonType } from '../types/PokemonType';
-import axios from 'axios';
 
 type CardComponantProps = {
     card: PokemonType,
-    setShowBuyCardModal: (showBuyCardModal: boolean) => void,
-    setModalInfos: (modalInfos: { cardID: string,cardName: string, userID: string, userCoin: number|any }) => void
 }
 
-const Card = ({card, setShowBuyCardModal, setModalInfos}:CardComponantProps) => {
+const Card = ({card}:CardComponantProps) => {
 
     const { userInfos } = useContext(UserContext);
 
+    const { setShowBuyCardModal, setBuyCardModalInfos} = useContext(BuyCardModalContext);
 
     const type = card.type[0]
-
-    
 
   return (
       <div className={styles.card_main_container}>
@@ -52,11 +49,11 @@ const Card = ({card, setShowBuyCardModal, setModalInfos}:CardComponantProps) => 
         <div className={styles.buy_line}>
             <p>{card.price} PkC</p>
             <button onClick={() => {
-                setModalInfos({cardID: card._id,cardName: card.name, userID: userInfos?._id, userCoin: userInfos?.pokeCoin})
                 setShowBuyCardModal(true)
+                setBuyCardModalInfos({cardID: card._id, cardName: card.name, cardPrice: card.price, userID: userInfos?._id, userCoin: userInfos?.pokeCoin})
             }}>Acheter</button>
         </div>
-    </div>
+      </div>
   )
 }
 

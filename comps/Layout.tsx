@@ -1,4 +1,4 @@
-import React , { useContext } from 'react'
+import React , { useContext, useState } from 'react'
 import Footer from './Footer'
 
 import Header from './Header'
@@ -12,18 +12,24 @@ type LayoutProps = {
 import { ModalContext } from '../context/ModalContext'
 
 import { UserContext } from '../context/UserContext'
+
+import { BuyCardModalContext } from '../context/BuyCardModalContext'
+
+import BuyCardModal from './BuyCardModal'
 //component
 const Layout = ({children}: LayoutProps) => {
 
     const { isLogModalOpen } = useContext(ModalContext)
     const { userIsLog } = useContext(UserContext)
+    const { showBuyCardModal } = useContext(BuyCardModalContext)
 
     return (
         <div className='main-container'>
+            {showBuyCardModal && <BuyCardModal/>}
+            {isLogModalOpen && <LogModal/>}
             <Header />
             {userIsLog && <UserBar/>}
             { children }
-            {isLogModalOpen && <LogModal/>}
             <Footer />
         </div>
     )

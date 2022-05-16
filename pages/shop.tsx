@@ -7,7 +7,6 @@ import axios from 'axios';
 // Style
 import styles from '../styles/pages/Shop.module.scss'
 import Card from '../comps/Card';
-import BuyCardModal from '../comps/BuyCardModal';
 
 //type
 interface IPokemon {
@@ -28,8 +27,6 @@ const Shop = () => {
   //State
   const [cards, setCards] = useState<IPokemon[]>([])
   const [loading, setLoading] = useState(true)
-  const [ showBuyCardModal, setShowBuyCardModal ] = useState(false)
-  const [ modalInfos, setModalInfos ] = useState({cardID:"", cardName:"",userID:"", userCoin:""})
   //Fetch data before render
   useEffect(() => {
     axios.get('/api/cards/getAllCardsFromDB')
@@ -50,11 +47,10 @@ const Shop = () => {
         <div className={styles.cards_container}>
           {!loading ? cards.map((card) => {
             return (
-              <Card key={card._id} card={card} setShowBuyCardModal={setShowBuyCardModal} setModalInfos={setModalInfos}/>
+              <Card key={card._id} card={card} />
             )
           }) : <p>Chargement des cartes ...</p>}
         </div>
-        {showBuyCardModal && <BuyCardModal setShowBuyCardModal={setShowBuyCardModal} modalInfos={modalInfos}/>}
     </div>
   )
 }
