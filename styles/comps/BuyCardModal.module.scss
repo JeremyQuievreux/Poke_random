@@ -1,0 +1,17 @@
+@import "../colors.scss";
+
+.buyCardModal_externe{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.500);
+    z-index: 11;
+    .buyCardModal_interne{
+        background-color: white;
+        height: 50%;
+        width: 50%;
+    }
+}

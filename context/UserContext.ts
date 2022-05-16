@@ -13,9 +13,9 @@ type CardType = {
 type UserInfosType = {
     _id: string | any,
     mail: string,
-    pseudo: string ,
+    pseudo: string,
     isAdmin: boolean,
-    pokeCoin: number,
+    pokeCoin: number | any,
     cardsList: CardType[]
 }
 
