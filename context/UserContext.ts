@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 type UserContextType = {
     userIsLog: boolean,
-    userInfos:UserInfosType | null,
+    userInfos:UserInfosType,
 }
 
 type UserInfosType = {

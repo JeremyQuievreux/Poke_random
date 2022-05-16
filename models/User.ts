@@ -7,26 +7,28 @@ interface IUser {
   password: string;
   isAdmin: boolean;
   pokeCoin: number;
-  cardsList: {
-    card: {},
-    quantity: number
-  }[];
+  cardsList: test[]
+}
+
+type test = {
+  card: string,
+  quantity: number,
 }
 
 // Schema
+const CardsListSchema = new mongoose.Schema({
+  card: String,
+  quantity: Number,
+}, {_id: false})
+
+
 const UserSchema = new mongoose.Schema<IUser>({
   pseudo: { type: String, required: true },
   mail: { type: String, required: true },
   password: { type: String, required: true },
   isAdmin: { type: Boolean, default: false },
   pokeCoin: { type: Number, default: 1000 },
-  cardsList: { 
-    type: [
-      {
-        card : { type: Object},
-        quantity: { type: Number}
-      }
-    ], default: []},
+  cardsList: [CardsListSchema],
 });
 
 // 3. Create a Model.
