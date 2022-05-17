@@ -50,7 +50,7 @@ const Collection = () => {
         <div className={styles.cards_container}>
           {userCards?.map((card) => {
             return (
-              <Card card={card}/>
+              <Card key={card._id} card={card}/>
               )
           })}
         </div>

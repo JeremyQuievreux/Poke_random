@@ -20,13 +20,13 @@
         }
     }
     nav{
-        width: 20%;
         display: flex;
         justify-content: space-between;
         margin-right: 20px;
         font-size: 18px;
         font-weight: bold;
         a{
+            margin: 20px;
             &:hover{
                 color: $primary_dark;
             }

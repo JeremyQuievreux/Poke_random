@@ -42,6 +42,11 @@ const Header = () => {
             <a>Profil</a>
           </Link>
         }
+        {userIsLog && 
+          <Link href={"/collection"}>
+            <a>Collection</a>
+          </Link>
+        }
         {userIsLog 
         ? 
         <Link href={"/"}>
