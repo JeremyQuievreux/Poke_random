@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 
 
 import styles from '../styles/pages/Profil.module.scss'
@@ -22,6 +23,7 @@ const User = () => {
         <p>PokeCardex : {userInfos?.cardsList.length} / 151</p>
         <p>Mail : {userInfos?.mail}</p>
         <p>Admin : {userInfos?.isAdmin}</p>
+        <Link href="/collection"><button>Collection</button></Link>
     </div>
   )
 }

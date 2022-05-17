@@ -29,6 +29,6 @@ const PokemonSchema = new mongoose.Schema<IPokemon>({
 });
 
 // 3. Create a Model.
-const PokemonModel = mongoose.models.pokemons || mongoose.model<IPokemon>("pokemons", PokemonSchema);
+const PokemonModel = mongoose.models.pokemon || mongoose.model<IPokemon>("pokemon", PokemonSchema);
 
 export default PokemonModel;
