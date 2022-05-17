@@ -58,7 +58,7 @@ const Collection = () => {
             return (
             <div className={styles.sub_container}>
               <Card  key={cardAndQuantity.card._id} card={cardAndQuantity.card}/>
-              <p>{cardAndQuantity.quantity}</p>
+              <p key={cardAndQuantity.card._id}>{cardAndQuantity.quantity}</p>
             </div>
               )
           })}

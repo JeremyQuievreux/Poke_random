@@ -50,7 +50,7 @@ const Shop = () => {
               return (
                 <div className={styles.sub_card_container}>
                   <Card key={card._id} card={card} />
-                  <BuyBtn card={card} />
+                  <BuyBtn key={card._id} card={card} />
                 </div>
               )
             }) : <p>Chargement des cartes ...</p>}
