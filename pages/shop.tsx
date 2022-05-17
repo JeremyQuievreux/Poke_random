@@ -48,9 +48,9 @@ const Shop = () => {
         <div className={styles.cards_container}>
             {!loading ? cards.map((card, index) => {
               return (
-                <div className={styles.sub_card_container}>
-                  <Card key={card._id} card={card} />
-                  <BuyBtn key={`btn${index}`} card={card} />
+                <div className={styles.sub_card_container} key={index}>
+                  <Card  card={card} />
+                  <BuyBtn card={card} />
                 </div>
               )
             }) : <p>Chargement des cartes ...</p>}

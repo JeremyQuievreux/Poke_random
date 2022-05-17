@@ -56,9 +56,9 @@ const Collection = () => {
         <div className={styles.cards_container}>
           {userCardsList?.map((cardAndQuantity, index) => {
             return (
-            <div className={styles.sub_container}>
-              <Card  key={cardAndQuantity.card._id} card={cardAndQuantity.card}/>
-              <p key={`p${index}`}>{cardAndQuantity.quantity}</p>
+            <div className={styles.sub_container} key={index}>
+              <Card card={cardAndQuantity.card}/>
+              <p>{cardAndQuantity.quantity}</p>
             </div>
               )
           })}
