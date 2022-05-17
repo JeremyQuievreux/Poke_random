@@ -12,12 +12,14 @@ interface IUser {
 
 type CardType = {
   card: string,
+  dex_number: number,
   quantity: number,
 }
 
 // Schema
-const CardsListSchema = new mongoose.Schema({
+const CardsListSchema = new mongoose.Schema<CardType>({
   card: { type: mongoose.Schema.Types.ObjectId, ref: 'pokemon' },
+  dex_number: Number,
   quantity: Number,
 }, {_id: false})
 

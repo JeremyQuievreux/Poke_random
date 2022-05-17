@@ -21,59 +21,51 @@ interface IUser {
 }
 type test = {
   card: string,
+  dex_number: number,
   quantity: number,
 }
 export default function handler(req: NextApiRequest,res: NextApiResponse<Data>) {
-    const {cardID, userID} = req.body
+  const {cardID, userID} = req.body
 
-    dbConnect()
-    //Find the pokemon card
-    PokemonModel.findById(cardID, (err: any, pokemonCard: any) => {
-      if (pokemonCard) {
-        console.log("card found");
-        //Find the user
-        UserModel.findById(userID, (err: any, user: IUser) => {
-          if (user) {
-            console.log("user find");
-            //Check if the user has enough pokecoin
-            if(user.pokeCoin >= pokemonCard.price){
-              console.log("assez de pokecoin");
-              const newPokeCoin = user.pokeCoin - pokemonCard.price
-              //Add the card to the user's card list
-              let newCardsList = user.cardsList;
-              const index = newCardsList.findIndex(card => card.card === cardID)
-              //If the article is not in the array
-              if (index == -1) {
-              //Add the article in the cart context
-              newCardsList = ([...newCardsList, {card: cardID, quantity: 1}])
-              } else {
-              newCardsList[index].quantity += 1
-              }
-              UserModel.updateOne({_id: userID}, {cardsList: newCardsList, pokeCoin: newPokeCoin}, (err: any) => {
-                if (!err) {
-                  TransactionModel.create({
-                    user: userID,
-                    style: "buy",
-                    card: cardID
-                  })
-                  .then(() => {
-                    res.status(200).send({error: false, message: "Card added to your cart"})          
-                  })
-                }
-              })
-
-            } else {
-              console.log("pas assez de pokecoin");
-              res.status(200).send({error: true, message: "not enouth pokecoin"})
-            }
+  dbConnect()
+  //Find the pokemon card
+  PokemonModel.findById(cardID, (err: any, pokemonCard: any) => {
+    //si pokemon ok
+    if (pokemonCard) {
+      console.log("card found : " + pokemonCard.name);
+      console.log("dex number : " + pokemonCard.dex_number);
+      UserModel.findById(userID, (err: any, user: any) => {
+        if(user){
+          console.log("user found : " + user.pseudo);
+          console.log("user coin : " + user.pokeCoin);
           
+          if(user.pokeCoin >= pokemonCard.price){
+            const newPokeCoin = user.pokeCoin - pokemonCard.price
+            const tempList: test[] = user.cardsList
+            const index = tempList.findIndex(cardline => cardline.dex_number == pokemonCard.dex_number)
+            console.log("index : " + index);
+            if(index == -1){
+              tempList.push({
+                card: pokemonCard._id,
+                dex_number: pokemonCard.dex_number,
+                quantity: 1
+              })
+            } else {
+              tempList[index].quantity += 1
+            }
+            UserModel.updateOne({_id: userID}, {cardsList: tempList, pokeCoin: newPokeCoin}, (err: any) => {
+              if(!err){
+                res.send({error: false, message: "Card added to user's collection"})
+              }
+            })
           } else {
-            console.log("user not find");
-            res.status(200).send({error: true, message: "user not found"})
+            res.send({error: true, message: "Not enough PokeCoin"})
           }
-      })
+      } else {
+        res.send({error: false, message: "user not found"})
+      }
+    })
     } else {
-      console.log("card not found");
       res.status(200).send({error: true, message: "card not found"})
     }
   })
