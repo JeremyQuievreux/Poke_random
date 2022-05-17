@@ -54,11 +54,11 @@ const Collection = () => {
     <div className={styles.collection_container}>
         <h2>Collection Page</h2>
         <div className={styles.cards_container}>
-          {userCardsList?.map((cardAndQuantity) => {
+          {userCardsList?.map((cardAndQuantity, index) => {
             return (
             <div className={styles.sub_container}>
               <Card  key={cardAndQuantity.card._id} card={cardAndQuantity.card}/>
-              <p key={cardAndQuantity.card._id}>{cardAndQuantity.quantity}</p>
+              <p key={`p${index}`}>{cardAndQuantity.quantity}</p>
             </div>
               )
           })}

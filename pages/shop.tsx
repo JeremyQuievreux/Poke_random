@@ -46,11 +46,11 @@ const Shop = () => {
       </Head>
         <h2>Boutique</h2>
         <div className={styles.cards_container}>
-            {!loading ? cards.map((card) => {
+            {!loading ? cards.map((card, index) => {
               return (
                 <div className={styles.sub_card_container}>
                   <Card key={card._id} card={card} />
-                  <BuyBtn key={card._id} card={card} />
+                  <BuyBtn key={`btn${index}`} card={card} />
                 </div>
               )
             }) : <p>Chargement des cartes ...</p>}
