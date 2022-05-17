@@ -7,6 +7,7 @@ import axios from 'axios';
 // Style
 import styles from '../styles/pages/Shop.module.scss'
 import Card from '../comps/Card';
+import BuyBtn from '../comps/BuyBtn';
 
 //type
 interface IPokemon {
@@ -45,11 +46,14 @@ const Shop = () => {
       </Head>
         <h2>Boutique</h2>
         <div className={styles.cards_container}>
-          {!loading ? cards.map((card) => {
-            return (
-              <Card key={card._id} card={card} />
-            )
-          }) : <p>Chargement des cartes ...</p>}
+            {!loading ? cards.map((card) => {
+              return (
+                <div className={styles.sub_card_container}>
+                  <Card key={card._id} card={card} />
+                  <BuyBtn card={card} />
+                </div>
+              )
+            }) : <p>Chargement des cartes ...</p>}
         </div>
     </div>
   )

@@ -5,6 +5,7 @@ import styles from "../styles/pages/Collection.module.scss"
 import { UserContext } from '../context/UserContext'
 import axios from 'axios'
 import Card from '../comps/Card';
+import BuyBtn from '../comps/BuyBtn';
 
 interface PokemonType {
   _id: string;
@@ -20,11 +21,16 @@ interface PokemonType {
   rarity: string;
 }
 
+type CardType = {
+  card: PokemonType,
+  quantity: number
+}
+
 
 const Collection = () => {
 
   const { userInfos } = useContext(UserContext)
-  const [ userCards, setUserCards ] = useState<[PokemonType]>()
+  const [ userCardsList, setUserCardsList ] = useState<[CardType]>()
 
   const userID = userInfos?._id
 
@@ -35,7 +41,7 @@ const Collection = () => {
       }
     })
     .then(res => {
-      setUserCards(res.data.data)
+      setUserCardsList(res.data.data.cardsList)
     })
   }
 
@@ -48,9 +54,12 @@ const Collection = () => {
     <div className={styles.collection_container}>
         <h2>Collection Page</h2>
         <div className={styles.cards_container}>
-          {userCards?.map((card) => {
+          {userCardsList?.map((cardAndQuantity) => {
             return (
-              <Card key={card._id} card={card}/>
+            <div className={styles.sub_container}>
+              <Card  key={cardAndQuantity.card._id} card={cardAndQuantity.card}/>
+              <p>{cardAndQuantity.quantity}</p>
+            </div>
               )
           })}
         </div>

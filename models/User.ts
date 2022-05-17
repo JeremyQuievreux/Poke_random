@@ -17,7 +17,7 @@ type CardType = {
 
 // Schema
 const CardsListSchema = new mongoose.Schema({
-  card: String,
+  card: { type: mongoose.Schema.Types.ObjectId, ref: 'pokemon' },
   quantity: Number,
 }, {_id: false})
 

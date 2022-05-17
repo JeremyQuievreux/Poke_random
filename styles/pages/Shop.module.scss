@@ -2,12 +2,19 @@
 
 .shop_container{
     min-height: calc(100vh - 160px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     .cards_container{
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        .sub_card_container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.8s;
+            &:hover{
+                transform: scale(1.25);
+                z-index: 10;
+            }
+        }
     }
 }

@@ -44,17 +44,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<DataTy
 
   dbConnect();
 
-  UserModel.findById(userDI, (err:any, user:UserType) => {
-    if (user){
-      const cardsList = user.cardsList;
-      const cardsIDList = cardsList.map(card => {
-        return card.card
-      })
-      PokemonModel.find({_id: {$in: cardsIDList}}, (err:any, pokemons:PokemonType[]) => {
-        if (pokemons) {
-          res.status(200).send({error: false, message: "Success", data: pokemons})
-        }
-      })
-    }
+  UserModel.findById(userDI)
+  .populate({ path: 'cardsList.card', model: 'pokemon' })
+  .then((resultat) => {
+    res.send({error: false, message: 'ok', data: resultat})
   })
 }
