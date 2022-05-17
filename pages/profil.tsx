@@ -20,7 +20,7 @@ const User = () => {
       </Head>
         <p>Pseudo : {userInfos?.pseudo}</p>
         <p>PokeCoins : {userInfos?.pokeCoin}</p>
-        <p>PokeCardex : {userInfos?.cardsList.length} / 151</p>
+        <p>PokeCardex : {userInfos?.totalCards} / 151</p>
         <p>Mail : {userInfos?.mail}</p>
         <p>Admin : {userInfos?.isAdmin}</p>
         <Link href="/collection"><button>Collection</button></Link>

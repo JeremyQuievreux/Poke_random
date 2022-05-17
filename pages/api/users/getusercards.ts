@@ -42,6 +42,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<DataTy
 
   const userDI = req.query.userID
 
+  dbConnect();
+
   UserModel.findById(userDI, (err:any, user:UserType) => {
     if (user){
       const cardsList = user.cardsList;

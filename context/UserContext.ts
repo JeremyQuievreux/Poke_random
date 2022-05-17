@@ -16,7 +16,7 @@ type UserInfosType = {
     pseudo: string,
     isAdmin: boolean,
     pokeCoin: number | any,
-    cardsList: CardType[]
+    totalCards: number
 }
 
 export const UserContext = createContext<UserContextType>({

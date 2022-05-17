@@ -22,7 +22,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
             UserModel.findOne({_id: decoded.id}, (err: any, user: any) => {
                 if (user){
-                    res.status(200).send({error: false, message: 'User found', data: user});
+                    const tempUser = {
+                        _id: user._id,
+                        pseudo: user.pseudo,
+                        mail: user.mail,
+                        isAdmin: user.isAdmin,
+                        pokeCoin: user.pokeCoin,
+                        totalCards: user.cardsList.length
+                    }
+                    res.status(200).send({error: false, message: 'User found', data: tempUser});
                 } else {
                     res.status(200).send({error: true, message: 'User not found'});
                 }
