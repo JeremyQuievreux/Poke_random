@@ -1,0 +1,6 @@
+1 - Bouton vendre afficher de maniere conditionnel (si quantity >=1)
+2 - Responsive
+3 - Centraliser les types
+4 - Page profil, afficher/modifier les informations
+5 - Sécurisé les routes, si pas de localstorage
+6 - Créer un globalContext pour ne plus en avoir plusieurs
