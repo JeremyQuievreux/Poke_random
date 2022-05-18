@@ -32,9 +32,24 @@ const Collection = () => {
   const { userInfos } = useContext(UserContext)
   const [ userCardsList, setUserCardsList ] = useState<[CardType]>()
 
-  const userID = userInfos?._id
+  
 
-  const getallusercards = () => {
+  const getUserInfos = (IDtoken: string|null) => {
+    axios.get('/api/users/getUserInfos', {
+      headers: {
+        'Authorization': `Bearer ${IDtoken}`
+      }
+    })
+    .then(res => {
+      if(res.data.error === true){
+        console.log("error with token");
+      } else {
+        getallusercards(res.data.data._id)
+      }
+    })
+  }
+
+  const getallusercards = (userID:string) => {
     axios.get(`/api/users/getusercards`, {
       params: {
         userID
@@ -46,7 +61,8 @@ const Collection = () => {
   }
 
   useEffect(() => {
-    getallusercards()
+    const localToken:string|null = localStorage.getItem('@pkm-cnc')
+    getUserInfos(localToken)
   },[])
   
     
