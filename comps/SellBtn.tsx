@@ -1,13 +1,11 @@
+//Base
 import React, { useContext } from 'react'
-
-import { BsCoin } from "react-icons/bs";
-
 import styles from '../styles/comps/BuyBtn.module.scss'
-
+import { BsCoin } from "react-icons/bs";
+//Context
 import { SellCardModalContext } from '../context/SellCardModalContext'
-
 import { UserContext } from '../context/UserContext';
-
+//Type
 import { PokemonType } from '../types/PokemonType';
 
 type CardAndQuantityType = {
@@ -16,16 +14,13 @@ type CardAndQuantityType = {
     dex_number: number
 }
 
-
 type SellBtnProps = {
     card: CardAndQuantityType
 }
 
-
 const BuyBtn = ({card}:SellBtnProps) => {
-
+    //Context
     const { userInfos } = useContext(UserContext);
-
     const { setShowSellCardModal, setSellCardModalInfos} = useContext(SellCardModalContext);
 
   return (

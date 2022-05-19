@@ -1,15 +1,13 @@
+//Base
 import React, { useContext } from 'react'
-
 import styles from '../styles/comps/UserBar.module.scss'
-
-import { UserContext } from '../context/UserContext'
-
 import { MdCatchingPokemon } from "react-icons/md";
 import { BsCoin } from "react-icons/bs";
-
+//Context
+import { UserContext } from '../context/UserContext'
 
 const UserBar = () => {
-
+  //Context
   const { userInfos } = useContext(UserContext)
 
   return (

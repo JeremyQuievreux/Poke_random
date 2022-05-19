@@ -1,11 +1,10 @@
+//base
 import React, { useContext } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-
-
 import styles from '../styles/comps/Header.module.scss'
-// Recupere le contexte de ModalContext
+//Context
 import { ModalContext } from '../context/ModalContext'
 import { CheckStorageContext } from '../context/CheckStorageContext'
 import { UserContext } from '../context/UserContext'

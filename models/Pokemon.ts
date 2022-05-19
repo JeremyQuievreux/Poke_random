@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
-
-// Document interface
-interface IPokemon {
+//Create Type
+type PokemonType = {
     gen: number;
     dex_number: number;
     name: string;
@@ -13,9 +12,8 @@ interface IPokemon {
     weight: number;
     rarity: string;
 }
-
-// Schema
-const PokemonSchema = new mongoose.Schema<IPokemon>({
+// Create Schema
+const PokemonSchema = new mongoose.Schema<PokemonType>({
     gen: {type: Number, required: true},
     dex_number: {type: Number, required: true},
     name: {type: String, required: true},
@@ -27,8 +25,6 @@ const PokemonSchema = new mongoose.Schema<IPokemon>({
     weight: {type: Number, required: true},
     rarity: {type: String, required: true},
 });
-
 // 3. Create a Model.
-const PokemonModel = mongoose.models.pokemon || mongoose.model<IPokemon>("pokemon", PokemonSchema);
-
+const PokemonModel = mongoose.models.pokemon || mongoose.model<PokemonType>("pokemon", PokemonSchema);
 export default PokemonModel;

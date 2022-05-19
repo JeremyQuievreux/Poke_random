@@ -1,20 +1,17 @@
+//base
 import React, { useContext } from 'react'
-
 import { BsCoin } from "react-icons/bs";
-
+//style
 import styles from '../styles/comps/BuyBtn.module.scss'
-
+//context
 import { BuyCardModalContext } from '../context/BuyCardModalContext'
-
 import { UserContext } from '../context/UserContext';
-
+//type
 import { PokemonType } from '../types/PokemonType';
-
-
+//propstype
 type BuyBtnProps = {
     card: PokemonType,
 }
-
 
 const BuyBtn = ({card}:BuyBtnProps) => {
 

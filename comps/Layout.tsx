@@ -1,23 +1,22 @@
-import React , { useContext, useState } from 'react'
+//base
+import React , { useContext } from 'react'
+//comps
 import Footer from './Footer'
-
 import Header from './Header'
 import LogModal from './LogModal'
 import UserBar from './UserBar'
-//typage des props
+//Context
+import { ModalContext } from '../context/ModalContext'
+import { UserContext } from '../context/UserContext'
+import { BuyCardModalContext } from '../context/BuyCardModalContext'
+import { SellCardModalContext } from '../context/SellCardModalContext'
+//comps
+import BuyCardModal from './BuyCardModal'
+import SellCardModal from './SellCardModal'
+//propstype
 type LayoutProps = {
     children: React.ReactNode,
 }
-//Recupere le contexte de ModalContext
-import { ModalContext } from '../context/ModalContext'
-
-import { UserContext } from '../context/UserContext'
-
-import { BuyCardModalContext } from '../context/BuyCardModalContext'
-import { SellCardModalContext } from '../context/SellCardModalContext'
-
-import BuyCardModal from './BuyCardModal'
-import SellCardModal from './SellCardModal'
 //component
 const Layout = ({children}: LayoutProps) => {
 

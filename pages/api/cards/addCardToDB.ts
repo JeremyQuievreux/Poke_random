@@ -1,8 +1,9 @@
+//base
 import type { NextApiRequest, NextApiResponse } from 'next'
-
+//db + models
 import dbConnect from '../../../utils/dbConnect'
 import PokemonModel from '../../../models/Pokemon'
-
+//type
 type Data = {
     error: boolean,
     message: string,

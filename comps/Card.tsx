@@ -1,14 +1,12 @@
+//base
 import React, { useContext } from 'react'
-import Image from 'next/image';
-
 import styles from '../styles/comps/Card.module.scss'
-
+import { MdCatchingPokemon } from "react-icons/md";
+//external functions
 import { setBGColor } from '../utils/BGColorFunction';
 import { setPKBColor } from '../utils/PKBColor';
-
+//type
 import { PokemonType } from '../types/PokemonType';
-
-import { MdCatchingPokemon } from "react-icons/md";
 
 type CardComponantProps = {
     card: PokemonType,

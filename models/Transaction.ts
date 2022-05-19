@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 // Document interface
 type TransactionType = {
     userID: String,
@@ -8,7 +7,6 @@ type TransactionType = {
     cardID: String,
     cardName: String,
 }
-
 // Schema
 const TransactionSchema = new mongoose.Schema<TransactionType>({
   userID: String,
@@ -17,8 +15,5 @@ const TransactionSchema = new mongoose.Schema<TransactionType>({
   cardID: String,
   cardName: String,
 })
-
-
-
 // 3. Create a Model.
 export default mongoose.models.Transaction || mongoose.model<TransactionType>('Transaction', TransactionSchema);
