@@ -32,15 +32,11 @@ export default function handler(req: NextApiRequest,res: NextApiResponse<Data>) 
   PokemonModel.findById(cardID, (err: any, pokemonCard: any) => {
     //si pokemon ok
     if (pokemonCard) {
-      console.log("card found : " + pokemonCard.name);
-      console.log("dex number : " + pokemonCard.dex_number);
       UserModel.findById(userID, (err: any, user: any) => {
         if(user){
-          console.log("user found : " + user.pseudo);
             const newPokeCoin = user.pokeCoin + pokemonCard.price
             const tempList: test[] = user.cardsList
             const index = tempList.findIndex(cardline => cardline.dex_number == pokemonCard.dex_number)
-            console.log("index : " + index);
               tempList[index].quantity -= 1
             UserModel.updateOne({_id: userID}, {cardsList: tempList, pokeCoin: newPokeCoin}, (err: any) => {
               if(!err){
