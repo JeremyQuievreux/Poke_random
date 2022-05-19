@@ -55,7 +55,16 @@ export default function handler(req: NextApiRequest,res: NextApiResponse<Data>) 
             }
             UserModel.updateOne({_id: userID}, {cardsList: tempList, pokeCoin: newPokeCoin}, (err: any) => {
               if(!err){
-                res.send({error: false, message: "Card added to user's collection"})
+                TransactionModel.create({
+                  userID: userID,
+                  userName: user.pseudo,
+                  type: "buy",
+                  cardID: cardID,
+                  cardName: pokemonCard.name
+                })
+                .then(() => {
+                  res.send({error: false, message: "Card added to user's collection"})
+                })
               }
             })
           } else {

@@ -2,16 +2,20 @@ import mongoose from 'mongoose';
 
 // Document interface
 type TransactionType = {
-    user: String,
-    style: String,
-    card: String,
+    userID: String,
+    userName: String,
+    type: String,
+    cardID: String,
+    cardName: String,
 }
 
 // Schema
 const TransactionSchema = new mongoose.Schema<TransactionType>({
-  user: String,
-  style: String,
-  card: String,
+  userID: String,
+  userName: String,
+  type: String,
+  cardID: String,
+  cardName: String,
 })
 
 
