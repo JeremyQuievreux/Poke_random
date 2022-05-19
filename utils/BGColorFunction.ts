@@ -24,7 +24,7 @@ export const setBGColor = (type:string) => {
         case "Poison":
             return "#BA80CA"
             break;
-        case "Ténébre":
+        case "Spectre":
             return "#7B62A3"
             break;
         case "Electrik":
