@@ -6,22 +6,28 @@ import { CheckStorageContext } from '../context/CheckStorageContext';
 import { SellCardModalContext } from '../context/SellCardModalContext';
 import { UserContext } from '../context/UserContext';
 
+import axios from 'axios';
+
 
 const SellCardModal = () => {
 
     const { checkStorageFunction } = useContext(CheckStorageContext);
     const { setShowSellCardModal, sellCardModalInfos } = useContext(SellCardModalContext);
     const { userIsLog } = useContext(UserContext);
+    const { refreshUserCollection} = useContext(SellCardModalContext)
+
 
 
     const sellCard = (cardID: string, userID: string) =>  {
         console.log("a vendre");
         console.log("card id : " + cardID + " userID : " + userID);
-        /* axios.post('/api/cards/buyCard',{cardID,userID})
+        axios.post('/api/cards/sellCard',{cardID,userID})
         .then(res => {
             console.log(res.data);
             checkStorageFunction();
-        }) */
+            const localToken = localStorage.getItem('@pkm-cnc');
+            refreshUserCollection(localToken);
+        })
     }
 
   return (

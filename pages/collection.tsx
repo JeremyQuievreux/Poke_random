@@ -1,10 +1,12 @@
-import React,{ useEffect, useState } from 'react'
+import React,{ useEffect, useState, useContext } from 'react'
 
 import styles from "../styles/pages/Collection.module.scss"
 
 import axios from 'axios'
 import Card from '../comps/Card';
 import SellBtn from '../comps/SellBtn';
+
+import { SellCardModalContext } from '../context/SellCardModalContext'
 
 interface PokemonType {
   _id: string;
@@ -29,23 +31,12 @@ type CardType = {
 
 const Collection = () => {
 
-  const [ userCardsList, setUserCardsList ] = useState<[CardType]|null>(null)
-
-  const getUserAllCards = (localToken:string) => {
-    axios.get('/api/users/getuserallcards', {
-      headers: {
-        'Authorization': `Bearer ${localToken}`
-      }
-    })
-    .then((result)=> {
-      setUserCardsList(result.data.data.cardsList)
-    })
-  }
+  const { userCardsList, setUserCardsList , refreshUserCollection} = useContext(SellCardModalContext)
 
   useEffect(() => {
-    const localToken:string|null = localStorage.getItem('@pkm-cnc')
+    const localToken = localStorage.getItem('@pkm-cnc')
     if(localToken){
-      getUserAllCards(localToken)
+      refreshUserCollection(localToken)
     }
   },[])
   

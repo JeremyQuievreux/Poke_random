@@ -11,9 +11,18 @@ import { BuyCardModalContext } from '../context/BuyCardModalContext'
 import { SellCardModalContext } from '../context/SellCardModalContext'
 import axios from 'axios'
 
-type CardType = {
-  card: string,
-  quantity: number
+type PokemonType = {
+  _id: string;
+  gen: number;
+  dex_number: number;
+  name: string;
+  type: string[];
+  description: string;
+  picURL: string;
+  price: number;
+  height: number;
+  weight: number;
+  rarity: string;
 }
 
 type UserInfosType = {
@@ -39,6 +48,12 @@ type SellCardModalInfosType = {
   userCoin: number;
 }
 
+type CardType2 = {
+  card: PokemonType,
+  dex_number: number,
+  quantity: number
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   
   const [ isLogModalOpen, setIsLogModalOpen ] = useState<boolean>(false)
@@ -50,6 +65,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   
   const [ showSellCardModal, setShowSellCardModal ] = useState<boolean>(false)
   const [ sellCardModalInfos, setSellCardModalInfos ] = useState<SellCardModalInfosType>({cardID: '', cardName: '', cardPrice: 0, userID: '', userCoin: 0})
+
+  const [ userCardsList, setUserCardsList ] = useState<[CardType2]|null>(null)
 
   const getUserInfos = (IDtoken: string) => {
     axios.get('/api/users/getUserInfos', {
@@ -77,6 +94,28 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }
 
+  const refreshUserCollection = (localToken:string|null) => {
+    axios.get('/api/users/getuserallcards', {
+      headers: {
+        'Authorization': `Bearer ${localToken}`
+      }
+    })
+    .then((result)=> {
+      setUserCardsList(result.data.data.cardsList)
+    })
+  }
+
+  const SellCardModalContextValue = {
+    showSellCardModal,
+    setShowSellCardModal,
+    sellCardModalInfos,
+    setSellCardModalInfos,
+    userCardsList,
+    setUserCardsList,
+    refreshUserCollection
+
+  }
+
   const BuyCardModalContextValue = {
     showBuyCardModal,
     setShowBuyCardModal,
@@ -84,12 +123,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     setBuyCardModalInfos
   }
 
-  const SellCardModalContextValue = {
-    showSellCardModal,
-    setShowSellCardModal,
-    sellCardModalInfos,
-    setSellCardModalInfos
-  }
 
   const userContextValue = {
     userIsLog,
