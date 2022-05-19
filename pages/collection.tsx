@@ -4,6 +4,7 @@ import styles from "../styles/pages/Collection.module.scss"
 
 import axios from 'axios'
 import Card from '../comps/Card';
+import SellBtn from '../comps/SellBtn';
 
 interface PokemonType {
   _id: string;
@@ -21,6 +22,7 @@ interface PokemonType {
 
 type CardType = {
   card: PokemonType,
+  dex_number: number,
   quantity: number
 }
 
@@ -60,6 +62,9 @@ const Collection = () => {
                 <div className={styles.sub_container} key={index}>
                   <Card card={cardAndQuantity.card}/>
                   <p>{cardAndQuantity.quantity}</p>
+                  {cardAndQuantity.quantity > 1 && 
+                    <SellBtn card={cardAndQuantity}/>
+                  }
                 </div>
                 )
               })

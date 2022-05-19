@@ -8,6 +8,7 @@ import { ModalContext } from '../context/ModalContext'
 import { CheckStorageContext } from '../context/CheckStorageContext'
 import { UserContext } from '../context/UserContext'
 import { BuyCardModalContext } from '../context/BuyCardModalContext'
+import { SellCardModalContext } from '../context/SellCardModalContext'
 import axios from 'axios'
 
 type CardType = {
@@ -30,6 +31,13 @@ type BuyCardModalInfosType = {
   userID: string;
   userCoin: number;
 }
+type SellCardModalInfosType = {
+  cardID: string;
+  cardName: string;
+  cardPrice: number;
+  userID: string;
+  userCoin: number;
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   
@@ -39,6 +47,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const [ showBuyCardModal, setShowBuyCardModal ] = useState<boolean>(false)
   const [ buyCardModalInfos, setBuyCardModalInfos ] = useState<BuyCardModalInfosType>({cardID: '', cardName: '', cardPrice: 0, userID: '', userCoin: 0})
+  
+  const [ showSellCardModal, setShowSellCardModal ] = useState<boolean>(false)
+  const [ sellCardModalInfos, setSellCardModalInfos ] = useState<SellCardModalInfosType>({cardID: '', cardName: '', cardPrice: 0, userID: '', userCoin: 0})
 
   const getUserInfos = (IDtoken: string) => {
     axios.get('/api/users/getUserInfos', {
@@ -73,6 +84,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     setBuyCardModalInfos
   }
 
+  const SellCardModalContextValue = {
+    showSellCardModal,
+    setShowSellCardModal,
+    sellCardModalInfos,
+    setSellCardModalInfos
+  }
+
   const userContextValue = {
     userIsLog,
     userInfos
@@ -92,6 +110,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   },[])
 
   return (
+    <SellCardModalContext.Provider value={SellCardModalContextValue}>
     <BuyCardModalContext.Provider value={BuyCardModalContextValue}>
     <UserContext.Provider value={userContextValue}>
     <CheckStorageContext.Provider value={CheckStorageContextValue}>
@@ -103,6 +122,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     </CheckStorageContext.Provider>
     </UserContext.Provider>
     </BuyCardModalContext.Provider>
+    </SellCardModalContext.Provider>
   )
 }
 
