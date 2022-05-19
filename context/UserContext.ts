@@ -5,11 +5,6 @@ type UserContextType = {
     userInfos:UserInfosType | null
 }
 
-type CardType = {
-    card: string,
-    quantity: number
-}
-
 type UserInfosType = {
     _id: string | any,
     mail: string,
