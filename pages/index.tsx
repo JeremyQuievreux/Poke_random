@@ -4,10 +4,27 @@ import Head from 'next/head'
 import styles from '../styles/pages/Home.module.scss'
 
 import { UserContext } from '../context/UserContext'
+import { CheckStorageContext } from '../context/CheckStorageContext'
+import axios from 'axios'
 
 const Home: NextPage = () => {
 
   const { userIsLog } = useContext(UserContext)
+
+  const { checkStorageFunction } = useContext(CheckStorageContext)
+
+  const GetRandomCard = () => {
+    const localToken = localStorage.getItem('@pkm-cnc')
+    axios.get(`/api/cards/getRandomCard`, {
+      headers: {
+        'Authorization': `Bearer ${localToken}`
+      }
+    })
+    .then(res => {
+      console.log(res.data.message);
+      checkStorageFunction()
+    })
+  }
 
   return (
     <div className={styles.home_container}>
@@ -17,7 +34,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/pokeball2.png" />
       </Head>
       <h2>Home</h2>
-      {userIsLog ? <p>Vous êtes connecté</p> : <p>Vous êtes pas connecté</p>}     
+      {userIsLog &&
+      <>
+      <p><button onClick={() => GetRandomCard()}>Get 1 Random Card</button> &laquo;-----Bouton de test</p>   
+      <p>A chaque click un pokemon random sera ajouté a la collection</p>
+      </>
+      }
     </div>
   )
 }
