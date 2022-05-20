@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import dbConnect from '../../../utils/dbConnect'
 import UserModel from '../../../models/User'
+import PokemonModel from '../../../models/Pokemon';
 
 const bcrypt = require('bcrypt');
 const salt = 10
@@ -10,6 +11,12 @@ type Data = {
     error: boolean,
     message: string,
 }
+
+type CardType = {
+    card: string,
+    dex_number: number,
+    quantity: number,
+  }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
@@ -34,13 +41,25 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
                         //hashage du mot de passe
                         const hashPassword = bcrypt.hashSync(password, salt)
                         //création du nouvel utilisateur
-                        UserModel.create({
-                            pseudo,
-                            mail,
-                            password: hashPassword,
-                        })
-                        .then(() => {
-                            res.status(200).json({error: false, message: "Votre compte a bien été créé"});
+                        PokemonModel.find({})
+                        .then((pokemons) => {
+                            const tempList:CardType[] = []
+                            pokemons.forEach((pokemon) => {
+                                tempList.push({
+                                    card: pokemon._id,
+                                    dex_number: pokemon.dex_number,
+                                    quantity: 0,
+                                })
+                            })
+                            UserModel.create({
+                                pseudo,
+                                mail,
+                                password: hashPassword,
+                                cardsList: tempList,
+                            })
+                            .then(() => {
+                                res.status(200).json({error: false, message: "Votre compte a bien été créé"});
+                            })
                         })
                     } else {
                         res.status(200).send({error: true, message: "Ce mail est déjà utilisé"})

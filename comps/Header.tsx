@@ -43,7 +43,7 @@ const Header = () => {
         }
         {userIsLog && 
           <Link href={"/collection"}>
-            <a>Collection</a>
+            <a>Ma Collection</a>
           </Link>
         }
         {userIsLog 

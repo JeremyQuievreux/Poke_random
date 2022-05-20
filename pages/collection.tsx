@@ -42,7 +42,7 @@ const Collection = () => {
 
   const setFilter = (quantity:number) => {
     if(quantity === 0){
-      return {filter: "grayscale(100%) blur(4px)"}
+      return {filter: "grayscale(100%)"}
     }
   }
   

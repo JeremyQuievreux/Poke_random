@@ -31,7 +31,7 @@ type UserInfosType = {
   pseudo: string ,
   isAdmin: boolean,
   pokeCoin: number,
-  totalCards: number
+  cardsList: [CardType2]
 }
 type BuyCardModalInfosType = {
   cardID: string;

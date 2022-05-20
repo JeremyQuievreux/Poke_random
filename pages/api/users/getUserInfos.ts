@@ -28,7 +28,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
                         mail: user.mail,
                         isAdmin: user.isAdmin,
                         pokeCoin: user.pokeCoin,
-                        totalCards: user.cardsList.length
+                        cardsList: user.cardsList
                     }
                     res.status(200).send({error: false, message: 'User found', data: tempUser});
                 } else {
