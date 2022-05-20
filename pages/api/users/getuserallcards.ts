@@ -13,6 +13,7 @@ import dbConnect from '../../../utils/dbConnect'
 import UserModel from '../../../models/User'
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<DataType>) {
+    dbConnect()
 
     const token = req.headers.authorization?.split(' ')[1];
 
@@ -22,7 +23,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<DataTy
             res.status(200).send({error: true, message: 'Invalid token'});
         //token valid    
         } else {
-            dbConnect()
 
             UserModel.findById(decoded.id)
                 .populate({ path: 'cardsList.card', model: 'pokemon' })
