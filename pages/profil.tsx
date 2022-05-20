@@ -11,6 +11,8 @@ const User = () => {
 
   const { userInfos } =useContext(UserContext)
 
+  const alreadyGotCards = userInfos?.cardsList.filter((card) => card.quantity > 0)
+
   return (
     <div className={styles.profil_container}>
       <Head>
@@ -20,7 +22,7 @@ const User = () => {
       </Head>
         <p>Pseudo : {userInfos?.pseudo}</p>
         <p>PokeCoins : {userInfos?.pokeCoin}</p>
-        <p>PokeCardex : {userInfos?.totalCards} / 151</p>
+        <p>PokeCardex : {alreadyGotCards?.length} / 151</p>
         <p>Mail : {userInfos?.mail}</p>
         <p>Admin : {userInfos?.isAdmin}</p>
         <Link href="/collection"><button>Collection</button></Link>
