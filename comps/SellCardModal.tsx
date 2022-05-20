@@ -16,9 +16,11 @@ const SellCardModal = () => {
     //Function to sell card, pass card id and user id, after check storage and refresh collection page
     const sellCard = (cardID: string, userID: string) =>  {
         axios.post('/api/cards/sellCard',{cardID,userID})
-        .then(res => {
+        .then(() => {
             //Check storage to refresh userBar
             checkStorageFunction();
+        })
+        .then(()=> {
             const localToken = localStorage.getItem('@pkm-cnc');
             //Refresh collection page
             refreshUserCollection(localToken);
