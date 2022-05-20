@@ -6,8 +6,6 @@ import axios from 'axios'
 import Card from '../comps/Card';
 import SellBtn from '../comps/SellBtn';
 
-import { SellCardModalContext } from '../context/SellCardModalContext'
-
 interface PokemonType {
   _id: string;
   gen: number;
@@ -30,11 +28,10 @@ type CardType = {
 
 
 const Collection = () => {
-
-  const { userCardsList, setUserCardsList , refreshUserCollection} = useContext(SellCardModalContext)
-  const [ whatToSee, setWhatToSee ] = useState<string>("all")
-
+  const [allcardsFromDB, setAllcardsFromDB ] = useState<CardType[]>([])
   const [cardsToSee, setCardsToSee] = useState<CardType[]>([])
+
+  const [ whatToSee, setWhatToSee ] = useState<string>("all")
 
   const setFilter = (quantity:number) => {
     if(quantity === 0){
@@ -55,31 +52,31 @@ const Collection = () => {
         }
       })
       .then((result)=> {
-        setUserCardsList(result?.data.data.cardsList)
-        if(userCardsList){
-          setCardsToSee(userCardsList)
-        }
+        return result.data.data.cardsList
+      })
+      .then((result)=> {
+        setAllcardsFromDB(result)
       })
     }
   },[])
 
 
   useEffect(()=> {
-    if(userCardsList){
+    if(allcardsFromDB){
       if (whatToSee === "all") {
-        setCardsToSee(userCardsList)
+        setCardsToSee(allcardsFromDB)
       }
       if (whatToSee === "mine") {
-        setCardsToSee(userCardsList.filter(card => card.quantity > 0))
+        setCardsToSee(allcardsFromDB.filter(card => card.quantity > 0))
       }
       if (whatToSee === "duplicate") {
-        setCardsToSee(userCardsList.filter(card => card.quantity > 1))
+        setCardsToSee(allcardsFromDB.filter(card => card.quantity > 1))
       }
       if (whatToSee === "missing") {
-        setCardsToSee(userCardsList.filter(card => card.quantity == 0))
+        setCardsToSee(allcardsFromDB.filter(card => card.quantity == 0))
       }
     }
-  },[whatToSee, userCardsList])
+  },[whatToSee, allcardsFromDB])
 
     
   return (
