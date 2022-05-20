@@ -101,7 +101,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       }
     })
     .then((result)=> {
-      setUserCardsList(result.data.data.cardsList)
+      return result.data.data.cardsList
+    })
+    .then((result)=> {
+      setUserCardsList(result)
     })
   }
 

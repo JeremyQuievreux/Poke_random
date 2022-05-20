@@ -55,10 +55,10 @@ const Collection = () => {
         }
       })
       .then((result)=> {
-        setUserCardsList(result?.data.data.cardsList)
-        if(userCardsList){
-          setCardsToSee(userCardsList)
-        }
+        return result.data.data.cardsList
+      })
+      .then((result)=> {
+          setUserCardsList(result)
       })
     }
   },[])
