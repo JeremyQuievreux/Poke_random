@@ -39,6 +39,12 @@ const Collection = () => {
       refreshUserCollection(localToken)
     }
   },[])
+
+  const setFilter = (quantity:number) => {
+    if(quantity === 0){
+      return {filter: "grayscale(100%) blur(4px)"}
+    }
+  }
   
     
   return (
@@ -51,10 +57,14 @@ const Collection = () => {
               userCardsList?.map((cardAndQuantity, index) => {
                 return (
                 <div className={styles.sub_container} key={index}>
+                  <div style={setFilter(cardAndQuantity.quantity)}>
                   <Card card={cardAndQuantity.card}/>
-                  <p>{cardAndQuantity.quantity}</p>
+                  </div>
                   {cardAndQuantity.quantity > 1 && 
+                  <>
+                    <p>{cardAndQuantity.quantity}</p>
                     <SellBtn card={cardAndQuantity}/>
+                  </>
                   }
                 </div>
                 )
