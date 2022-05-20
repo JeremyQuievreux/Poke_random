@@ -2,4 +2,8 @@
 
 .profil_container{
     min-height: calc(100vh - 198px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

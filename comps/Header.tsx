@@ -57,7 +57,7 @@ const Header = () => {
               pathname: '/'
           })
           }}>
-            Log Out
+            Déconnection
           </a>
         </Link> 
         :

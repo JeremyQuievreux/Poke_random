@@ -1,6 +1,6 @@
 //Base
 import React, { useContext } from 'react'
-import styles from '../styles/comps/BuyBtn.module.scss'
+import styles from '../styles/comps/SellBtn.module.scss'
 import { BsCoin } from "react-icons/bs";
 //Context
 import { SellCardModalContext } from '../context/SellCardModalContext'
@@ -24,7 +24,7 @@ const BuyBtn = ({card}:SellBtnProps) => {
     const { setShowSellCardModal, setSellCardModalInfos} = useContext(SellCardModalContext);
 
   return (
-    <div className={styles.buy_line}>
+    <div className={styles.sell_line}>
         <p>{card.card.price} <BsCoin/></p>
         <button onClick={()=> {
             setShowSellCardModal(true);

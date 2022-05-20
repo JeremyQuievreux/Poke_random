@@ -7,6 +7,7 @@
     align-items: center;
     .radio_btn_block{
         margin-top: 10px;
+        margin-bottom: 10px;
         height: 40px;
         display: flex;
         justify-content: center;
@@ -27,9 +28,31 @@
             flex-direction: column;
             align-items: center;
             transition: transform 0.8s;
+            position: relative;
             &:hover{
                 transform: scale(1.25);
                 z-index: 10;
+            }
+            .sellBtn_line{
+                width: calc(100% - 40px);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .quantity_number{
+                background-color: gold;
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 2px solid black;
+                margin-bottom: 20px;
+                position: absolute;
+                p{
+                    margin-bottom: 4px;
+                }
             }
         }
     }

@@ -34,6 +34,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/pokeball2.png" />
       </Head>
       <h2>Home</h2>
+      <h3>Work in progress ... </h3>
       {userIsLog &&
       <>
       <p><button onClick={() => GetRandomCard()}>Get 1 Random Card</button> &laquo;-----Bouton de test</p>   

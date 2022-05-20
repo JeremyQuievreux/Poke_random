@@ -55,7 +55,7 @@ const Collection = () => {
         }
       })
       .then((result)=> {
-        setUserCardsList(result.data.data.cardsList)
+        setUserCardsList(result?.data.data.cardsList)
         if(userCardsList){
           setCardsToSee(userCardsList)
         }
@@ -75,6 +75,9 @@ const Collection = () => {
       if (whatToSee === "duplicate") {
         setCardsToSee(userCardsList.filter(card => card.quantity > 1))
       }
+      if (whatToSee === "missing") {
+        setCardsToSee(userCardsList.filter(card => card.quantity == 0))
+      }
     }
   },[whatToSee, userCardsList])
 
@@ -88,11 +91,11 @@ const Collection = () => {
           <label> Mes cartes </label>
           <input type="radio" name="seeing" id="duplicate" value="duplicate" defaultChecked={whatToSee === "duplicate"}/>
           <label> Mes doubles </label>
+          <input type="radio" name="seeing" id="duplicate" value="missing" defaultChecked={whatToSee === "missing"}/>
+          <label> Cartes manquantes </label>
         </div>
         <div className={styles.cards_container}>
-          {cardsToSee ?
-            cardsToSee.length >= 1 
-              ?
+          {cardsToSee &&
               cardsToSee?.map((cardAndQuantity, index) => {
                 return (
                 <div className={styles.sub_container} key={index}>
@@ -100,18 +103,17 @@ const Collection = () => {
                   <Card card={cardAndQuantity.card}/>
                   </div>
                   {cardAndQuantity.quantity > 1 && 
-                  <>
-                    <p>{cardAndQuantity.quantity}</p>
+                  <div className={styles.sellBtn_line}>
                     <SellBtn card={cardAndQuantity}/>
-                  </>
+                  </div>
                   }
+                    {cardAndQuantity.quantity > 1 &&
+                    <div className={styles.quantity_number}>
+                      <p > x {cardAndQuantity.quantity}</p>
+                    </div>}
                 </div>
                 )
               })
-              : 
-              <p>Pas de cartes trouvées</p>
-            :
-            <p>Loading ...</p>
           }
         </div>
     </div>
