@@ -11,48 +11,13 @@ import { BuyCardModalContext } from '../context/BuyCardModalContext'
 import { SellCardModalContext } from '../context/SellCardModalContext'
 import axios from 'axios'
 
-type PokemonType = {
-  _id: string;
-  gen: number;
-  dex_number: number;
-  name: string;
-  type: string[];
-  description: string;
-  picURL: string;
-  price: number;
-  height: number;
-  weight: number;
-  rarity: string;
-}
+import { CollectionLineType } from '../types/CollectionLineType'
 
-type UserInfosType = {
-  _id: string | any,
-  mail: string,
-  pseudo: string ,
-  isAdmin: boolean,
-  pokeCoin: number,
-  cardsList: [CardType2]
-}
-type BuyCardModalInfosType = {
-  cardID: string;
-  cardName: string;
-  cardPrice: number;
-  userID: string;
-  userCoin: number;
-}
-type SellCardModalInfosType = {
-  cardID: string;
-  cardName: string;
-  cardPrice: number;
-  userID: string;
-  userCoin: number;
-}
+import { UserInfosType } from '../types/UserInfosType'
 
-type CardType2 = {
-  card: PokemonType,
-  dex_number: number,
-  quantity: number
-}
+import { BuyCardModalInfosType } from '../types/BuyCardModalInfosType'
+
+import { SellCardModalInfosType } from '../types/SellCardModalInfosType'
 
 function MyApp({ Component, pageProps }: AppProps) {
   
@@ -66,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [ showSellCardModal, setShowSellCardModal ] = useState<boolean>(false)
   const [ sellCardModalInfos, setSellCardModalInfos ] = useState<SellCardModalInfosType>({cardID: '', cardName: '', cardPrice: 0, userID: '', userCoin: 0})
 
-  const [ userCardsList, setUserCardsList ] = useState<[CardType2]|null>(null)
+  const [ userCardsList, setUserCardsList ] = useState<[CollectionLineType]|null>(null)
 
   const getUserInfos = (IDtoken: string) => {
     axios.get('/api/users/getUserInfos', {

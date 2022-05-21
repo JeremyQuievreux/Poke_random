@@ -7,15 +7,11 @@ import { SellCardModalContext } from '../context/SellCardModalContext'
 import { UserContext } from '../context/UserContext';
 //Type
 import { PokemonType } from '../types/PokemonType';
+import { CollectionLineType } from '../types/CollectionLineType';
 
-type CardAndQuantityType = {
-    card: PokemonType,
-    quantity: number
-    dex_number: number
-}
 
 type SellBtnProps = {
-    card: CardAndQuantityType
+    card: CollectionLineType
 }
 
 const BuyBtn = ({card}:SellBtnProps) => {

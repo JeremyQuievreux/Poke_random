@@ -9,23 +9,11 @@ import { typesPKM } from '../utils/selectorLists'
 import { rarityList } from '../utils/selectorLists'
 import { priceList } from '../utils/selectorLists'
 
-type CardInfos = {
-    gen: number | "",
-    dex_number: number | "",
-    name: string,
-    type1:string,
-    type2:string,
-    description: string,
-    picURL: string,
-    price: number | "",
-    height: number | "",
-    weight: number | "",
-    rarity: string,
-}
+import { CreatePokemonType } from '../types/CreatePokemonType'
 
 const CreateCard = () => {
 
-    const [ cardInfos , setCardInfos ] = useState<CardInfos>({
+    const [ cardInfos , setCardInfos ] = useState<CreatePokemonType>({
         gen: "", 
         dex_number: "", 
         name: "", 

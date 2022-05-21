@@ -3,21 +3,17 @@ import axios from 'axios'
 import React, { useState } from 'react'
 //import styles
 import styles from '../styles/comps/FormCreate.module.scss'
+
+import { CreateUserType } from '../types/CreateUserType'
 //typage des props
 type FormCreateProps = {
     setLoginState: (loginState: "login" | "create") => void
 }
-//typage du state User{}
-type UserCreate = {
-    pseudo: string,
-    mail: string,
-    mailConfirm: string,
-    password: string
-}
+
 //Component
 const FormCreate = ({setLoginState}: FormCreateProps) => {
     //state
-    const [ user, setUser ] = useState<UserCreate>({pseudo: "", mail: "", mailConfirm: "", password: ""})
+    const [ user, setUser ] = useState<CreateUserType>({pseudo: "", mail: "", mailConfirm: "", password: ""})
     const [ errorMessage, setErrorMessage] = useState<string|null>(null)
     const [ successMessage, setSuccessMessage] = useState<string|null>(null)
     //methode pour update le state onChange des inputs

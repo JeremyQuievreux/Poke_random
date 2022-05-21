@@ -3,16 +3,15 @@ import { useRouter } from 'next/router'
 
 import styles from '../styles/comps/FormLogin.module.scss'
 
+import { UserLoginType } from '../types/UserLoginType'
+
 import axios from 'axios'
 //typage des props
 type FormLoginProps = {
     setLoginState: (loginState: "login"|"create") => void
 }
 //typage du state User{}
-type UserConnect = {
-    mail: string,
-    password: string
-}
+
 
 import { ModalContext } from '../context/ModalContext'
 import { CheckStorageContext } from '../context/CheckStorageContext'
@@ -25,7 +24,7 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
     //routage
     const router = useRouter()
     //state
-    const [ user, setUser ] = useState<UserConnect>({mail: "" , password: ""})
+    const [ user, setUser ] = useState<UserLoginType>({mail: "" , password: ""})
     const [ errorMessage, setErrorMessage] = useState<string|null>(null)
     //methode pour update le state onChange des inputs
     const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {

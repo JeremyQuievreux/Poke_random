@@ -1,13 +1,6 @@
 import { createContext } from 'react';
 
-type BuyCardModalInfosType = {
-    cardID: string;
-    cardName: string;
-    cardPrice: number;
-    userID: string;
-    userCoin: number;
-}
-
+import { BuyCardModalInfosType } from '../types/BuyCardModalInfosType';
 
 type BuyCardModalContextType = {
     showBuyCardModal: boolean;

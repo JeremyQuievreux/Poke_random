@@ -1,12 +1,6 @@
 import mongoose from 'mongoose';
 // Document interface
-type TransactionType = {
-    userID: String,
-    userName: String,
-    type: String,
-    cardID: String,
-    cardName: String,
-}
+import { TransactionType } from '../types/TransactionType';
 // Schema
 const TransactionSchema = new mongoose.Schema<TransactionType>({
   userID: String,

@@ -1,18 +1,7 @@
 import mongoose from 'mongoose';
 // Document interface
-type UserType = {
-  pseudo: string;
-  mail: string;
-  password: string;
-  isAdmin: boolean;
-  pokeCoin: number;
-  cardsList: CardType[]
-}
-type CardType = {
-  card: string,
-  dex_number: number,
-  quantity: number,
-}
+import { UserType } from '../types/UserType';
+import { CardType } from '../types/CardType';
 // Schema
 const CardsListSchema = new mongoose.Schema<CardType>({
   card: { type: mongoose.Schema.Types.ObjectId, ref: 'pokemon' },

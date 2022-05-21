@@ -1,17 +1,6 @@
 import mongoose from 'mongoose';
 //Create Type
-type PokemonType = {
-    gen: number;
-    dex_number: number;
-    name: string;
-    type: string[];
-    description: string;
-    picURL: string;
-    price: number;
-    height: number;
-    weight: number;
-    rarity: string;
-}
+import { PokemonType } from '../types/PokemonType';
 // Create Schema
 const PokemonSchema = new mongoose.Schema<PokemonType>({
     gen: {type: Number, required: true},

@@ -1,41 +1,16 @@
 import { createContext } from 'react';
 
-type SellCardModalInfosType = {
-    cardID: string;
-    cardName: string;
-    cardPrice: number;
-    userID: string;
-    userCoin: number;
-}
+import { SellCardModalInfosType } from '../types/SellCardModalInfosType';
 
-type CardType = {
-    card: PokemonType,
-    dex_number: number,
-    quantity: number
-}
-
-type PokemonType = {
-    _id: string;
-    gen: number;
-    dex_number: number;
-    name: string;
-    type: string[];
-    description: string;
-    picURL: string;
-    price: number;
-    height: number;
-    weight: number;
-    rarity: string;
-  }
-
+import { CollectionLineType } from '../types/CollectionLineType';
 
 type SellCardModalContextType = {
     showSellCardModal: boolean;
     setShowSellCardModal: (showBuyCardModal: boolean) => void;
     sellCardModalInfos: SellCardModalInfosType;
     setSellCardModalInfos: (buyCardModalInfos: SellCardModalInfosType) => void;
-    userCardsList: [CardType]|null;
-    setUserCardsList: (userCardsList: [CardType]|null) => void;
+    userCardsList: [CollectionLineType]|null;
+    setUserCardsList: (userCardsList: [CollectionLineType]|null) => void;
     refreshUserCollection: (localToken:string|null) => void;
 }
   

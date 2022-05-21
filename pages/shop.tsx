@@ -9,24 +9,14 @@ import styles from '../styles/pages/Shop.module.scss'
 import Card from '../comps/Card';
 import BuyBtn from '../comps/BuyBtn';
 
+import { PokemonType } from '../types/PokemonType';
+
 //type
-interface IPokemon {
-  _id: string;
-  gen: number;
-  dex_number: number;
-  name: string;
-  type: string[];
-  description: string;
-  picURL: string;
-  price: number;
-  height: number;
-  weight: number;
-  rarity: string;
-}
+
 
 const Shop = () => {
   //State
-  const [cards, setCards] = useState<IPokemon[]>([])
+  const [cards, setCards] = useState<PokemonType[]>([])
   const [loading, setLoading] = useState(true)
   //Fetch data before render
   useEffect(() => {

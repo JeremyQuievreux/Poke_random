@@ -8,25 +8,9 @@ import SellBtn from '../comps/SellBtn';
 
 import { SellCardModalContext } from '../context/SellCardModalContext'
 
-interface PokemonType {
-  _id: string;
-  gen: number;
-  dex_number: number;
-  name: string;
-  type: string[];
-  description: string;
-  picURL: string;
-  price: number;
-  height: number;
-  weight: number;
-  rarity: string;
-}
+import { CollectionLineType } from '../types/CollectionLineType';
 
-type CardType = {
-  card: PokemonType,
-  dex_number: number,
-  quantity: number
-}
+
 
 
 const Collection = () => {
@@ -34,7 +18,7 @@ const Collection = () => {
   const { userCardsList, setUserCardsList , refreshUserCollection} = useContext(SellCardModalContext)
   const [ whatToSee, setWhatToSee ] = useState<string>("all")
 
-  const [cardsToSee, setCardsToSee] = useState<CardType[]>([])
+  const [cardsToSee, setCardsToSee] = useState<CollectionLineType[]>([])
 
   const setFilter = (quantity:number) => {
     if(quantity === 0){
