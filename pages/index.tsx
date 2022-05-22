@@ -3,15 +3,12 @@ import { useContext } from 'react'
 import Head from 'next/head'
 import styles from '../styles/pages/Home.module.scss'
 
-import { UserContext } from '../context/UserContext'
-import { CheckStorageContext } from '../context/CheckStorageContext'
+import { GlobalContext } from '../context/GlobalContext'
 import axios from 'axios'
 
 const Home: NextPage = () => {
 
-  const { userIsLog } = useContext(UserContext)
-
-  const { checkStorageFunction } = useContext(CheckStorageContext)
+  const { userIsLogged, hardRefresh } = useContext(GlobalContext)
 
   const GetRandomCard = () => {
     const localToken = localStorage.getItem('@pkm-cnc')
@@ -22,7 +19,7 @@ const Home: NextPage = () => {
     })
     .then(res => {
       console.log(res.data.message);
-      checkStorageFunction()
+      hardRefresh()
     })
   }
 
@@ -35,7 +32,7 @@ const Home: NextPage = () => {
       </Head>
       <h2>Home</h2>
       <h3>Work in progress ... </h3>
-      {userIsLog &&
+      {userIsLogged &&
       <>
       <p><button onClick={() => GetRandomCard()}>Get 1 Random Card</button> &laquo;-----Bouton de test</p>   
       <p>A chaque click un pokemon random sera ajouté a la collection</p>

@@ -3,17 +3,16 @@ import React, { useContext } from 'react'
 import styles from '../styles/comps/BuyCardModal.module.scss'
 import axios from 'axios';
 //context
-import { CheckStorageContext } from '../context/CheckStorageContext';
 import { BuyCardModalContext } from '../context/BuyCardModalContext';
-import { UserContext } from '../context/UserContext';
 import { ModalContext } from '../context/ModalContext';
+import { GlobalContext } from '../context/GlobalContext';
 
 const BuyCardModal = () => {
     //set context 
-    const { checkStorageFunction } = useContext(CheckStorageContext);
     const { setShowBuyCardModal, buyCardModalInfos } = useContext(BuyCardModalContext);
-    const { userIsLog } = useContext(UserContext);
     const { setIsLogModalOpen } = useContext(ModalContext);
+    
+    const { userIsLogged, hardRefresh } = useContext(GlobalContext);
 
     const haveMoney = buyCardModalInfos.userCoin >= buyCardModalInfos.cardPrice;
     //function to buy card, pass card id and user id, after check storage
@@ -21,12 +20,12 @@ const BuyCardModal = () => {
         console.log("card id : " + cardID + " userID : " + userID);
         axios.post('/api/cards/buyCard',{cardID,userID})
         .then(() => {
-            checkStorageFunction();
+            hardRefresh();
         })
     }
     //function who return conditional content of modal
     const modalRender = () => {
-        if(userIsLog){
+        if(userIsLogged){
             if (haveMoney) {
                 return (<>
                         <div className={styles.modal_header}>

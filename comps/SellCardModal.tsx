@@ -3,27 +3,20 @@ import React, { useContext } from 'react'
 import styles from '../styles/comps/BuyCardModal.module.scss'
 import axios from 'axios';
 //Context
-import { CheckStorageContext } from '../context/CheckStorageContext';
 import { SellCardModalContext } from '../context/SellCardModalContext';
-import { UserContext } from '../context/UserContext';
+import { GlobalContext } from '../context/GlobalContext';
 
 const SellCardModal = () => {
     //Context
-    const { checkStorageFunction } = useContext(CheckStorageContext);
     const { setShowSellCardModal, sellCardModalInfos } = useContext(SellCardModalContext);
-    const { userIsLog } = useContext(UserContext);
-    const { refreshUserCollection} = useContext(SellCardModalContext)
+
+    const { hardRefresh } = useContext(GlobalContext);
     //Function to sell card, pass card id and user id, after check storage and refresh collection page
     const sellCard = (cardID: string, userID: string) =>  {
         axios.post('/api/cards/sellCard',{cardID,userID})
         .then(() => {
             //Check storage to refresh userBar
-            checkStorageFunction();
-        })
-        .then(()=> {
-            const localToken = localStorage.getItem('@pkm-cnc');
-            //Refresh collection page
-            refreshUserCollection(localToken);
+            hardRefresh();
         })
     }
 

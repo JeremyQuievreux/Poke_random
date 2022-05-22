@@ -4,9 +4,8 @@ import styles from '../styles/comps/SellBtn.module.scss'
 import { BsCoin } from "react-icons/bs";
 //Context
 import { SellCardModalContext } from '../context/SellCardModalContext'
-import { UserContext } from '../context/UserContext';
+import { GlobalContext } from '../context/GlobalContext';
 //Type
-import { PokemonType } from '../types/PokemonType';
 import { CollectionLineType } from '../types/CollectionLineType';
 
 
@@ -16,7 +15,7 @@ type SellBtnProps = {
 
 const BuyBtn = ({card}:SellBtnProps) => {
     //Context
-    const { userInfos } = useContext(UserContext);
+    const { userFullInfos } = useContext(GlobalContext);
     const { setShowSellCardModal, setSellCardModalInfos} = useContext(SellCardModalContext);
 
   return (
@@ -24,7 +23,7 @@ const BuyBtn = ({card}:SellBtnProps) => {
         <p>{card.card.price} <BsCoin/></p>
         <button onClick={()=> {
             setShowSellCardModal(true);
-            setSellCardModalInfos({cardID: card.card._id, cardName: card.card.name, cardPrice: card.card.price, userID: userInfos?._id, userCoin: userInfos?.pokeCoin})
+            setSellCardModalInfos({cardID: card.card._id, cardName: card.card.name, cardPrice: card.card.price, userID: userFullInfos?._id, userCoin: userFullInfos?.pokeCoin})
         }}>Vendre</button>
     </div>
   )

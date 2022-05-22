@@ -6,16 +6,15 @@ import { useRouter } from 'next/router'
 import styles from '../styles/comps/Header.module.scss'
 //Context
 import { ModalContext } from '../context/ModalContext'
-import { CheckStorageContext } from '../context/CheckStorageContext'
-import { UserContext } from '../context/UserContext'
+
+import { GlobalContext } from '../context/GlobalContext'
 
 //component
 const Header = () => {
 
   const router = useRouter()
   const { setIsLogModalOpen } = useContext(ModalContext)
-  const { checkStorageFunction } = useContext(CheckStorageContext)
-  const { userIsLog, userInfos } = useContext(UserContext)
+  const { userIsLogged, hardRefresh } = useContext(GlobalContext)
 
   return (
     <div className={styles.navbar_container}>
@@ -36,23 +35,23 @@ const Header = () => {
         <Link href={"/shop"}>
           <a>Boutique</a>
         </Link>
-        {userIsLog && 
+        {userIsLogged && 
           <Link href={"/profil"}>
             <a>Profil</a>
           </Link>
         }
-        {userIsLog && 
+        {userIsLogged && 
           <Link href={"/collection"}>
             <a>Ma Collection</a>
           </Link>
         }
-        {userIsLog 
+        {userIsLogged 
         ? 
         <Link href={"/"}>
           <a onClick={(e) => {
             e.preventDefault()
             localStorage.removeItem("@pkm-cnc")
-            checkStorageFunction()
+            hardRefresh()
             router.push({
               pathname: '/'
           })

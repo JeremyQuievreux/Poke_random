@@ -5,13 +5,14 @@ import Link from 'next/link'
 
 import styles from '../styles/pages/Profil.module.scss'
 
-import { UserContext } from '../context/UserContext'
+import { GlobalContext } from '../context/GlobalContext'
+
 
 const User = () => {
 
-  const { userInfos } =useContext(UserContext)
+  const { userFullInfos } = useContext(GlobalContext)
 
-  const alreadyGotCards = userInfos?.cardsList.filter((card) => card.quantity > 0)
+  const alreadyGotCards = userFullInfos?.cardsList.filter((card) => card.quantity > 0)
 
   return (
     <div className={styles.profil_container}>
@@ -21,11 +22,11 @@ const User = () => {
         <link rel="icon" href="/pokeball2.png" />
       </Head>
         <h3>Work in progress ... </h3>
-        <p>Pseudo : {userInfos?.pseudo}</p>
-        <p>PokeCoins : {userInfos?.pokeCoin}</p>
+        <p>Pseudo : {userFullInfos?.pseudo}</p>
+        <p>PokeCoins : {userFullInfos?.pokeCoin}</p>
         <p>PokeCardex : {alreadyGotCards?.length} / 151</p>
-        <p>Mail : {userInfos?.mail}</p>
-        <p>Admin : {userInfos?.isAdmin}</p>
+        <p>Mail : {userFullInfos?.mail}</p>
+        <p>Admin : {userFullInfos?.isAdmin}</p>
         <Link href="/collection"><button>Collection</button></Link>
     </div>
   )

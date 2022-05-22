@@ -2,11 +2,10 @@ import React,{ useEffect, useState, useContext } from 'react'
 
 import styles from "../styles/pages/Collection.module.scss"
 
-import axios from 'axios'
 import Card from '../comps/Card';
 import SellBtn from '../comps/SellBtn';
 
-import { SellCardModalContext } from '../context/SellCardModalContext'
+import { GlobalContext } from '../context/GlobalContext';
 
 import { CollectionLineType } from '../types/CollectionLineType';
 
@@ -15,7 +14,8 @@ import { CollectionLineType } from '../types/CollectionLineType';
 
 const Collection = () => {
 
-  const { userCardsList, setUserCardsList , refreshUserCollection} = useContext(SellCardModalContext)
+  const { userFullInfos } = useContext(GlobalContext)
+
   const [ whatToSee, setWhatToSee ] = useState<string>("all")
 
   const [cardsToSee, setCardsToSee] = useState<CollectionLineType[]>([])
@@ -30,40 +30,24 @@ const Collection = () => {
     setWhatToSee(e.target.value)
   }
 
-  useEffect(() => {
-    const localToken = localStorage.getItem('@pkm-cnc')
-    if(localToken){
-      axios.get('/api/users/getuserallcards', {
-        headers: {
-          'Authorization': `Bearer ${localToken}`
-        }
-      })
-      .then((result)=> {
-        return result.data.data.cardsList
-      })
-      .then((result)=> {
-          setUserCardsList(result)
-      })
-    }
-  },[])
-
+  const cardsList = userFullInfos?.cardsList
 
   useEffect(()=> {
-    if(userCardsList){
+    if(cardsList){
       if (whatToSee === "all") {
-        setCardsToSee(userCardsList)
+        setCardsToSee(cardsList)
       }
       if (whatToSee === "mine") {
-        setCardsToSee(userCardsList.filter(card => card.quantity > 0))
+        setCardsToSee(cardsList.filter(card => card.quantity > 0))
       }
       if (whatToSee === "duplicate") {
-        setCardsToSee(userCardsList.filter(card => card.quantity > 1))
+        setCardsToSee(cardsList.filter(card => card.quantity > 1))
       }
       if (whatToSee === "missing") {
-        setCardsToSee(userCardsList.filter(card => card.quantity == 0))
+        setCardsToSee(cardsList.filter(card => card.quantity == 0))
       }
     }
-  },[whatToSee, userCardsList])
+  },[whatToSee, cardsList])
 
     
   return (

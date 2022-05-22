@@ -7,9 +7,9 @@ import LogModal from './LogModal'
 import UserBar from './UserBar'
 //Context
 import { ModalContext } from '../context/ModalContext'
-import { UserContext } from '../context/UserContext'
 import { BuyCardModalContext } from '../context/BuyCardModalContext'
 import { SellCardModalContext } from '../context/SellCardModalContext'
+import { GlobalContext } from '../context/GlobalContext'
 //comps
 import BuyCardModal from './BuyCardModal'
 import SellCardModal from './SellCardModal'
@@ -21,9 +21,10 @@ type LayoutProps = {
 const Layout = ({children}: LayoutProps) => {
 
     const { isLogModalOpen } = useContext(ModalContext)
-    const { userIsLog } = useContext(UserContext)
     const { showBuyCardModal } = useContext(BuyCardModalContext)
     const { showSellCardModal } = useContext(SellCardModalContext)
+
+    const { userIsLogged, hardRefresh } = useContext(GlobalContext)
 
     return (
         <div className='main-container'>
@@ -31,7 +32,7 @@ const Layout = ({children}: LayoutProps) => {
             {showSellCardModal && <SellCardModal/>}
             {isLogModalOpen && <LogModal/>}
             <Header />
-            {userIsLog && <UserBar/>}
+            {userIsLogged && <UserBar/>}
             { children }
             <Footer />
         </div>

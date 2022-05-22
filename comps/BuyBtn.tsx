@@ -5,7 +5,7 @@ import { BsCoin } from "react-icons/bs";
 import styles from '../styles/comps/BuyBtn.module.scss'
 //context
 import { BuyCardModalContext } from '../context/BuyCardModalContext'
-import { UserContext } from '../context/UserContext';
+import { GlobalContext } from '../context/GlobalContext';
 //type
 import { PokemonType } from '../types/PokemonType';
 //propstype
@@ -15,8 +15,7 @@ type BuyBtnProps = {
 
 const BuyBtn = ({card}:BuyBtnProps) => {
 
-    const { userInfos } = useContext(UserContext);
-
+    const { userFullInfos } = useContext(GlobalContext);
     const { setShowBuyCardModal, setBuyCardModalInfos} = useContext(BuyCardModalContext);
 
   return (
@@ -24,7 +23,7 @@ const BuyBtn = ({card}:BuyBtnProps) => {
         <p>{card.price} <BsCoin/></p>
         <button onClick={() => {
             setShowBuyCardModal(true)
-            setBuyCardModalInfos({cardID: card._id, cardName: card.name, cardPrice: card.price, userID: userInfos?._id, userCoin: userInfos?.pokeCoin})
+            setBuyCardModalInfos({cardID: card._id, cardName: card.name, cardPrice: card.price, userID: userFullInfos?._id, userCoin: userFullInfos?.pokeCoin})
         }}>Acheter</button>
     </div>
   )

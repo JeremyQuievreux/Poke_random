@@ -14,13 +14,16 @@ type FormLoginProps = {
 
 
 import { ModalContext } from '../context/ModalContext'
-import { CheckStorageContext } from '../context/CheckStorageContext'
+import { GlobalContext } from '../context/GlobalContext'
 
 //Component
 const FormLogin = ({setLoginState}: FormLoginProps) => {
+    //reforge
+    const { hardRefresh } = useContext(GlobalContext)
+    //end
+
     //Context
     const { setIsLogModalOpen } = useContext(ModalContext)
-    const { checkStorageFunction } = useContext(CheckStorageContext)
     //routage
     const router = useRouter()
     //state
@@ -42,7 +45,7 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
                     router.push({
                         pathname: '/'
                     })
-                    checkStorageFunction()
+                    hardRefresh()
                 } else {
                     setErrorMessage(res.data.message)
                     setTimeout(() => {
