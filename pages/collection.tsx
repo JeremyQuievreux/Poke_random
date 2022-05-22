@@ -63,7 +63,7 @@ const Collection = () => {
           <label> Cartes manquantes </label>
         </div>
         <div className={styles.cards_container}>
-          {cardsToSee &&
+          {cardsToSee.length > 1 ?
               cardsToSee?.map((cardAndQuantity, index) => {
                 return (
                 <div className={styles.sub_container} key={index}>
@@ -81,7 +81,8 @@ const Collection = () => {
                     </div>}
                 </div>
                 )
-              })
+              }) :
+              <p>Pas de carte trouvées</p>
           }
         </div>
     </div>

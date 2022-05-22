@@ -17,7 +17,6 @@ const BuyCardModal = () => {
     const haveMoney = buyCardModalInfos.userCoin >= buyCardModalInfos.cardPrice;
     //function to buy card, pass card id and user id, after check storage
     const buycard = (cardID: string, userID: string) =>  {
-        console.log("card id : " + cardID + " userID : " + userID);
         axios.post('/api/cards/buyCard',{cardID,userID})
         .then(() => {
             hardRefresh();

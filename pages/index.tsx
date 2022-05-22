@@ -18,7 +18,6 @@ const Home: NextPage = () => {
       }
     })
     .then(res => {
-      console.log(res.data.message);
       hardRefresh()
     })
   }
