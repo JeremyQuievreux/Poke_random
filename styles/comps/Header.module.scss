@@ -6,12 +6,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
     border-bottom: 3px solid $primary;
     .navbar_logo{
         display: flex;
         align-items: center;
-        border: 2px solid black;
+        justify-content: center;
+        padding-right: 20px;
         .navbar_icon{
             margin: 0 20px;
             display: flex;
@@ -30,6 +30,31 @@
             &:hover{
                 color: $primary_dark;
             }
+        }
+    }
+}
+
+@media (max-width: 1150px){
+    .navbar_container{
+        flex-direction: column;
+    }
+}
+@media (max-width: 650px){
+    .navbar_container{
+        nav{
+            font-size: 14px;
+        }
+}
+}
+@media (max-width: 500px){
+    .navbar_container{
+        .navbar_logo{
+            h1{
+                font-size: 20px;
+            }
+        }
+        nav{
+            font-size: 10px;
         }
     }
 }

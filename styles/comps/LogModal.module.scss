@@ -34,3 +34,18 @@
         }
     }
 }
+
+@media (max-width: 1000px){
+    .logModal_externe{
+        .logModal_interne{
+            width: 80%;
+        }
+    }
+}
+@media (max-width: 500px){
+    .logModal_externe{
+        .logModal_interne{
+            width: 95%;
+        }
+    }
+}
