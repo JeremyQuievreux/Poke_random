@@ -32,8 +32,8 @@ const SellCardModal = () => {
                 </div>
                 <div className={styles.modal_footer}>
                     <button onClick={() => {
-                        setShowSellCardModal(false)
                         sellCard(sellCardModalInfos.cardID, sellCardModalInfos.userID)
+                        setShowSellCardModal(false)
                     }}>OUI</button>
                     <button onClick={() => {
                         setShowSellCardModal(false)
