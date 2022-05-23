@@ -42,10 +42,10 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
                     localStorage.setItem("@pkm-cnc",res.data.data)
                     setUser({mail: "", password: ""})
                     setIsLogModalOpen(false)
+                    hardRefresh()
                     router.push({
                         pathname: '/'
                     })
-                    hardRefresh()
                 } else {
                     setErrorMessage(res.data.message)
                     setTimeout(() => {

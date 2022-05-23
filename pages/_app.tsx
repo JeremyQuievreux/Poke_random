@@ -36,13 +36,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const hardRefresh = () => {
     const localToken = localStorage.getItem('@pkm-cnc')
-    if(localToken) {
       axios.get('/api/users/getuserallcards', {
         headers: {
           'Authorization': `Bearer ${localToken}`
         }
       })
       .then(res => {
+        if (res.data.message === "Invalid token") {
+          localStorage.removeItem('@pkm-cnc')
+        }
         if(res.data.error === true){
           setUserIsLogged(false)
           setUserFullInfos(null)
@@ -51,6 +53,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           setUserFullInfos(res.data.data);
         }
       })
+  }
+
+  const checkLocaleStorage = () => {
+    const localToken = localStorage.getItem('@pkm-cnc')
+    if(localToken){
+      hardRefresh()
     } else {
       setUserIsLogged(false)
     }
@@ -86,7 +94,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   useEffect(() => {
-    hardRefresh()
+    checkLocaleStorage()
   },[])
 
   return (
