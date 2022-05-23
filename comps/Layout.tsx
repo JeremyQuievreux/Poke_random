@@ -24,7 +24,7 @@ const Layout = ({children}: LayoutProps) => {
     const { showBuyCardModal } = useContext(BuyCardModalContext)
     const { showSellCardModal } = useContext(SellCardModalContext)
 
-    const { userIsLogged, hardRefresh } = useContext(GlobalContext)
+    const { userIsLogged } = useContext(GlobalContext)
 
     return (
         <div className='main-container'>

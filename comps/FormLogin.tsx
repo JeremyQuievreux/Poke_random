@@ -19,9 +19,8 @@ import { GlobalContext } from '../context/GlobalContext'
 //Component
 const FormLogin = ({setLoginState}: FormLoginProps) => {
     //reforge
-    const { hardRefresh } = useContext(GlobalContext)
     //end
-
+    const { checkLocalStorage } = useContext(GlobalContext)
     //Context
     const { setIsLogModalOpen } = useContext(ModalContext)
     //routage
@@ -42,7 +41,7 @@ const FormLogin = ({setLoginState}: FormLoginProps) => {
                     localStorage.setItem("@pkm-cnc",res.data.data)
                     setUser({mail: "", password: ""})
                     setIsLogModalOpen(false)
-                    hardRefresh()
+                    checkLocalStorage()
                     router.push({
                         pathname: '/'
                     })

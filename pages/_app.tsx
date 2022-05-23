@@ -31,45 +31,46 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [ sellCardModalInfos, setSellCardModalInfos ] = useState<SellCardModalInfosType>({cardID: '', cardName: '', cardPrice: 0, userID: '', userCoin: 0})
 
   //reforge
-  const [ userIsLogged, setUserIsLogged ] = useState<boolean>(true)
+  const [ userIsLogged, setUserIsLogged ] = useState<boolean>(false)
   const [ userFullInfos, setUserFullInfos ] = useState<UserInfosType|null>(null)
 
-  const hardRefresh = () => {
-    const localToken = localStorage.getItem('@pkm-cnc')
-      axios.get('/api/users/getuserallcards', {
-        headers: {
-          'Authorization': `Bearer ${localToken}`
-        }
-      })
-      .then(res => {
-        if (res.data.message === "Invalid token") {
-          localStorage.removeItem('@pkm-cnc')
-        }
-        if(res.data.error === true){
-          setUserIsLogged(false)
-          setUserFullInfos(null)
-        } else {
-          setUserIsLogged(true)
-          setUserFullInfos(res.data.data)
-        }
-      })
+  const getUserInfos = (localToken:string) => {
+    console.log("je recherche les infos");
+    axios.get('/api/users/getuserallcards', {
+      headers: {
+        'Authorization': `Bearer ${localToken}`
+      }
+    })
+    .then((res) => {
+      if(res.data.error){
+        console.log(res.data.message);
+      } else {
+        setUserIsLogged(true)
+        setUserFullInfos(res.data.data)
+      }
+    })
   }
 
-  const checkLocaleStorage = () => {
+  const checkLocalStorage = () => {
     const localToken = localStorage.getItem('@pkm-cnc')
     if(localToken){
-      hardRefresh()
-    } else {
+      console.log("token found");
+      getUserInfos(localToken)
+    }
+    else {
+      console.log("token not found");
       setUserIsLogged(false)
     }
   }
+
+  
 
   const GlobalContextValue = {
     userIsLogged,
     setUserIsLogged,
     userFullInfos,
     setUserFullInfos,
-    hardRefresh
+    checkLocalStorage
   }
 
   //end reforge
@@ -93,14 +94,20 @@ function MyApp({ Component, pageProps }: AppProps) {
     setIsLogModalOpen
   }
 
+
+  
   useEffect(() => {
-    checkLocaleStorage()
+    checkLocalStorage()
   },[])
+
+
+
+
 
   return (
     <SellCardModalContext.Provider value={SellCardModalContextValue}>
     <BuyCardModalContext.Provider value={BuyCardModalContextValue}>
-      <GlobalContext.Provider value={GlobalContextValue}>
+    <GlobalContext.Provider value={GlobalContextValue}>
     <ModalContext.Provider value={modalContextValue}>
       <Layout>
         <Component {...pageProps} />

@@ -11,6 +11,7 @@ type DataType = {
 
 import dbConnect from '../../../utils/dbConnect'
 import UserModel from '../../../models/User'
+import PokemonModel from '../../../models/Pokemon';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<DataType>) {
     dbConnect()
@@ -20,16 +21,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<DataTy
     jwt.verify(token, process.env.JWT_SECRET, (err: any, decoded: any) => {
         //token invalid
         if (err) {
+            console.log("invalid token");
             res.status(200).send({error: true, message: 'Invalid token'});
         //token valid    
         } else {
-
+            console.log("valid token");
             UserModel.findById(decoded.id)
-                .populate({ path: 'cardsList.card', model: 'pokemon' })
+                .populate({ path: 'cardsList.card', model: PokemonModel })
                 .then((result) => {
-                    res.status(200).send({error: false, message: 'ok', data: result})
+                    res.status(200).send({error: false, message: 'ok', data: result});
                 })
                 .catch((err) => {
+                    console.log(err);
                     res.status(200).send({error: true, message: 'No user found'})
                 })
             }

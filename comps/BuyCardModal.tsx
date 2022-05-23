@@ -12,14 +12,14 @@ const BuyCardModal = () => {
     const { setShowBuyCardModal, buyCardModalInfos } = useContext(BuyCardModalContext);
     const { setIsLogModalOpen } = useContext(ModalContext);
     
-    const { userIsLogged, hardRefresh } = useContext(GlobalContext);
+    const { userIsLogged, checkLocalStorage } = useContext(GlobalContext);
 
     const haveMoney = buyCardModalInfos.userCoin >= buyCardModalInfos.cardPrice;
     //function to buy card, pass card id and user id, after check storage
     const buycard = (cardID: string, userID: string) =>  {
         axios.post('/api/cards/buyCard',{cardID,userID})
         .then(() => {
-            hardRefresh();
+            checkLocalStorage();
         })
     }
     //function who return conditional content of modal

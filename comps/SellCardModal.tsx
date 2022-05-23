@@ -10,13 +10,13 @@ const SellCardModal = () => {
     //Context
     const { setShowSellCardModal, sellCardModalInfos } = useContext(SellCardModalContext);
 
-    const { hardRefresh } = useContext(GlobalContext);
+    const { checkLocalStorage } = useContext(GlobalContext);
     //Function to sell card, pass card id and user id, after check storage and refresh collection page
     const sellCard = (cardID: string, userID: string) =>  {
         axios.post('/api/cards/sellCard',{cardID,userID})
         .then(() => {
             //Check storage to refresh userBar
-            hardRefresh();
+            checkLocalStorage();
         })
     }
 

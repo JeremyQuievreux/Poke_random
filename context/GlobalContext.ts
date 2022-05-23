@@ -7,7 +7,7 @@ type GlobalContextType = {
     setUserIsLogged: (userIsLogged:boolean) => void,
     userFullInfos: UserInfosType | null,
     setUserFullInfos: (userFullInfos:UserInfosType) => void,
-    hardRefresh: () => void,
+    checkLocalStorage: () => void,
 }
 
 
@@ -17,5 +17,5 @@ export const GlobalContext = createContext<GlobalContextType>({
     setUserIsLogged: () => {},
     userFullInfos: null,
     setUserFullInfos: () => {},
-    hardRefresh: () => {},
+    checkLocalStorage: () => {},
 })

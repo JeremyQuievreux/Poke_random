@@ -14,7 +14,7 @@ const Header = () => {
 
   const router = useRouter()
   const { setIsLogModalOpen } = useContext(ModalContext)
-  const { userIsLogged, hardRefresh } = useContext(GlobalContext)
+  const { userIsLogged, checkLocalStorage } = useContext(GlobalContext)
 
   return (
     <div className={styles.navbar_container}>
@@ -51,7 +51,7 @@ const Header = () => {
           <a onClick={(e) => {
             e.preventDefault()
             localStorage.removeItem("@pkm-cnc")
-            hardRefresh()
+            checkLocalStorage()
             router.push({
               pathname: '/'
           })

@@ -8,7 +8,7 @@ import axios from 'axios'
 
 const Home: NextPage = () => {
 
-  const { userIsLogged, hardRefresh } = useContext(GlobalContext)
+  const { userIsLogged, checkLocalStorage } = useContext(GlobalContext)
 
   const GetRandomCard = () => {
     const localToken = localStorage.getItem('@pkm-cnc')
@@ -18,7 +18,7 @@ const Home: NextPage = () => {
       }
     })
     .then(res => {
-      hardRefresh()
+      checkLocalStorage()
     })
   }
 
