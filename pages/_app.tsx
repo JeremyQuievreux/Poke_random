@@ -50,7 +50,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           setUserFullInfos(null)
         } else {
           setUserIsLogged(true)
-          setUserFullInfos(res.data.data);
+          setUserFullInfos(res.data.data)
         }
       })
   }
@@ -98,17 +98,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   },[])
 
   return (
-    <GlobalContext.Provider value={GlobalContextValue}>
     <SellCardModalContext.Provider value={SellCardModalContextValue}>
     <BuyCardModalContext.Provider value={BuyCardModalContextValue}>
+      <GlobalContext.Provider value={GlobalContextValue}>
     <ModalContext.Provider value={modalContextValue}>
       <Layout>
         <Component {...pageProps} />
       </Layout>
     </ModalContext.Provider>
+    </GlobalContext.Provider>
     </BuyCardModalContext.Provider>
     </SellCardModalContext.Provider>
-    </GlobalContext.Provider>
   )
 }
 
