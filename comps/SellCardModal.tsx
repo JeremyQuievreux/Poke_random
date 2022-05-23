@@ -33,7 +33,9 @@ const SellCardModal = () => {
                 <div className={styles.modal_footer}>
                     <button onClick={() => {
                         sellCard(sellCardModalInfos.cardID, sellCardModalInfos.userID)
-                        setShowSellCardModal(false)
+                        setTimeout(() => {
+                            setShowSellCardModal(false)
+                        },1500)
                     }}>OUI</button>
                     <button onClick={() => {
                         setShowSellCardModal(false)
