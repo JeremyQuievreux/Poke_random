@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+const { DateTime } = require('luxon')
+
 import dbConnect from '../../../utils/dbConnect'
 import UserModel from '../../../models/User'
 import PokemonModel from '../../../models/Pokemon';
@@ -20,8 +22,10 @@ type CardType = {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
+    
+    
     const { pseudo, mail, mailConfirm, password } = req.body;
-
+    
     /* if (pseudo === " " || mail === " " || password === " " || mailConfirm === " ") {
         res.status(200).send({error: true, message: "Veuillez remplir tous les champs"})
     } */
@@ -32,6 +36,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         
         dbConnect()
 
+        const next_click = DateTime.now().toFormat("yyyy-MM-dd'T'HH:mm:ss")
+        
         //verifie que le pseudo n'existe pas déjà
         UserModel.findOne({ pseudo: pseudo }, (err: string, user :{}) => {
             if (user === null) {
@@ -56,6 +62,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
                                 mail,
                                 password: hashPassword,
                                 cardsList: tempList,
+                                next_click,
                             })
                             .then(() => {
                                 res.status(200).json({error: false, message: "Votre compte a bien été créé"});

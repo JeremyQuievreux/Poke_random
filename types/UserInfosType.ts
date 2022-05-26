@@ -7,5 +7,6 @@ export type UserInfosType = {
     password: string,
     isAdmin: boolean,
     pokeCoin: number | any,
-    cardsList: [CollectionLineType]
+    cardsList: [CollectionLineType],
+    next_click: string,
 }
