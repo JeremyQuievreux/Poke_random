@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import axios from 'axios'
 
 import { DateTime } from 'luxon'
 
@@ -12,7 +13,7 @@ import { GlobalContext } from '../context/GlobalContext'
 
 const User = () => {
 
-  const { userFullInfos } = useContext(GlobalContext)
+  const { userFullInfos, checkLocalStorage } = useContext(GlobalContext)
 
   const alreadyGotCards = userFullInfos?.cardsList.filter((card) => card.quantity > 0)
 
@@ -20,9 +21,23 @@ const User = () => {
 
   const dtNow = DateTime.local().toFormat('yyyy-MM-dd HH:mm:ss')
 
+  const getRandomCard = () => {
+    console.log("j'ai cliqué")
+    const localToken = localStorage.getItem('@pkm-cnc')
+    axios.get(`/api/cards/test`, {
+      headers: {
+        'Authorization': `Bearer ${localToken}`
+      }
+    })
+    .then((res) => {
+      console.log(res.data);
+      checkLocalStorage()
+    })
+  }
+
   const checkDate = (dtDB:string,dtNow:string) => {
     if (dtDB < dtNow) {
-      return <button>Click pour cartes</button>
+      return <button onClick={getRandomCard}>Click pour cartes</button>
     } else {
       return <button disabled>Click pour cartes</button>
     }
