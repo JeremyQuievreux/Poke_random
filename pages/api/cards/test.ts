@@ -27,7 +27,7 @@ export default function handler(req: NextApiRequest,res: NextApiResponse<Data>) 
                 console.log(dtBase);
                 
 
-                const hydrateDT = DateTime.fromFormat(dtBase, "yyyy-MM-dd HH:mm:ss").plus({hours:1})
+                const hydrateDT = DateTime.local().plus({hours:1})
 
                 const new_next_click = hydrateDT.toFormat('yyyy-MM-dd HH:mm:ss')                
 
