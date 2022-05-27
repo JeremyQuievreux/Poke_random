@@ -7,6 +7,8 @@ import PokemonModel from '../../../models/Pokemon';
 const bcrypt = require('bcrypt');
 const salt = 10
 
+const { DateTime } = require('luxon')
+
 type Data = {
     error: boolean,
     message: string,
@@ -33,6 +35,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     } else {
         
         dbConnect()
+        const next_click = DateTime.now().toFormat("yyyy-MM-dd'T'HH:mm:ss")
         
         //verifie que le pseudo n'existe pas déjà
         UserModel.findOne({ pseudo: pseudo }, (err: string, user :{}) => {
@@ -58,6 +61,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
                                 mail,
                                 password: hashPassword,
                                 cardsList: tempList,
+                                next_click
                             })
                             .then(() => {
                                 res.status(200).json({error: false, message: "Votre compte a bien été créé"});

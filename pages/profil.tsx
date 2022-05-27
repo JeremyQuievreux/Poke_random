@@ -15,6 +15,8 @@ const User = () => {
   
   const alreadyGotCards = userFullInfos?.cardsList.filter((card) => card.quantity > 0)
   
+  console.log(userFullInfos?.next_click);
+  
 
   const getRandomCard = () => {
     console.log("j'ai cliqué")
@@ -45,7 +47,7 @@ const User = () => {
       <p>Mail : {userFullInfos?.mail}</p>
       <p>Admin : {userFullInfos?.isAdmin}</p>
       <p>Next Click : {userFullInfos?.next_click}</p>
-        </div>
+      </div>
   )
 }
 
