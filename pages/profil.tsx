@@ -3,29 +3,18 @@ import Head from 'next/head'
 import Link from 'next/link'
 import axios from 'axios'
 
-import { DateTime } from 'luxon'
-
-
 import styles from '../styles/pages/Profil.module.scss'
 
 import { GlobalContext } from '../context/GlobalContext'
 
-
 const User = () => {
-
-  const { userFullInfos, checkLocalStorage } = useContext(GlobalContext)
-
-  const [ btnIsDisabled, setBtnIsDisabled ] = useState(true)
-
-  const alreadyGotCards = userFullInfos?.cardsList.filter((card) => card.quantity > 0)
-
-  const dtDB = userFullInfos?.next_click;
-
-  const dtNow = DateTime.local().toFormat('yyyy-MM-dd HH:mm:ss')
-
-  console.log(dtDB);
   
-  console.log(dtNow);
+  const { userFullInfos, checkLocalStorage } = useContext(GlobalContext)
+  
+  const [ btnIsDisabled, setBtnIsDisabled ] = useState(true)
+  
+  const alreadyGotCards = userFullInfos?.cardsList.filter((card) => card.quantity > 0)
+  
 
   const getRandomCard = () => {
     console.log("j'ai cliqué")
@@ -40,47 +29,6 @@ const User = () => {
       checkLocalStorage()
     })
   }
-
-  const checkDate = () => {
-    if(dtDB){
-      if (dtDB < dtNow) {
-        setBtnIsDisabled(false)
-        console.log("date ok");
-        
-      } else {
-        setBtnIsDisabled(true)
-        console.log("date pas ok");
-      }
-    }
-  }
-
-  const repeatFonction = () => {
-    setInterval(()=> {
-      checkDate()
-    },1000)
-  }
-
-
-  useEffect(() => {
-    checkDate()
-  },[userFullInfos])
-
-  useEffect(()=>{
-    const interval = setInterval(()=> {
-    const dtNow2 = DateTime.local().toFormat('yyyy-MM-dd HH:mm:ss')
-
-      if(dtDB){
-        if (dtDB < dtNow2) {
-          console.log("date ok");
-          checkLocalStorage()
-          clearInterval(interval)
-        } else {
-          console.log("date pas ok");
-        }
-      }
-    } ,1000)
-    return () => clearInterval(interval)
-  },[])
 
   return (
     <div className={styles.profil_container}>

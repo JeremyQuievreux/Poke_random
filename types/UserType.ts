@@ -7,5 +7,5 @@ export type UserType = {
     isAdmin: boolean;
     pokeCoin: number;
     cardsList: CardType[];
-    next_click: string;
+    next_click: Date;
   }
