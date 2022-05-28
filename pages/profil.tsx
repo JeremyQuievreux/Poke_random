@@ -7,7 +7,7 @@ import styles from '../styles/pages/Profil.module.scss'
 
 import { GlobalContext } from '../context/GlobalContext'
 
-import {DateTime} from 'luxon'
+const {DateTime} = require('luxon')
 
 const User = () => {
   
