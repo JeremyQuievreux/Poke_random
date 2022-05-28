@@ -71,7 +71,9 @@ const User = () => {
     }
   },[userFullInfos, btnIsDisabled])
 
-  
+  useEffect(()=> {
+    checkDate()
+  } ,[])
 
 
   return (
