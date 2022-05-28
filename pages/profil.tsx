@@ -21,12 +21,16 @@ const User = () => {
 
   const getRandomCard = () => {
     console.log("j'ai cliqué")
+    const newNext_click = DateTime.local().plus({hours: 1}).toISO()
     const localToken = localStorage.getItem('@pkm-cnc')
     axios.get(`/api/cards/test`, {
       headers: {
         'Authorization': `Bearer ${localToken}`
+      },
+      params: {
+        next_click: newNext_click
       }
-    })
+      })
     .then((res) => {
       console.log(res.data);
       checkLocalStorage()

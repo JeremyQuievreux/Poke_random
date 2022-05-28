@@ -17,21 +17,15 @@ type Data = {
 
 export default function handler(req: NextApiRequest,res: NextApiResponse<Data>) {
     const token = req.headers.authorization?.split(' ')[1];
+    const new_next_click = req.query.next_click
+    
 
     jwt.verify(token, process.env.JWT_SECRET, (err: any, decoded: any) => {
         if(err){
             res.status(200).send({error: true, message: "invalid token"})
         }else {
             UserModel.findById(decoded.id, (err: any, user:UserInfosType) => {
-                const dtBase = user.next_click
-                console.log(dtBase);
-                
 
-                const hydrateDT = DateTime.local().plus({hours:1})
-
-                const new_next_click = hydrateDT.toISO()
-
-                console.log(new_next_click);
                 if(err){
                     res.status(200).send({error:true, message: "user not found"})
                 } else {
