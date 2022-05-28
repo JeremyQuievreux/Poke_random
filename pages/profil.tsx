@@ -10,6 +10,8 @@ import { GlobalContext } from '../context/GlobalContext'
 const {DateTime} = require('luxon')
 
 const User = () => {
+
+  
   
   const [ btnIsDisabled, setBtnIsDisabled ] = useState(true)
   
@@ -17,8 +19,6 @@ const User = () => {
   
   const alreadyGotCards = userFullInfos?.cardsList.filter((card) => card.quantity > 0)
 
-  const [ countdown, setCountdown ] = useState({hours: 0, minutes: 0, seconds: 0})
-    
   const getRandomCard = () => {
     console.log("j'ai cliqué")
     const localToken = localStorage.getItem('@pkm-cnc')
@@ -46,8 +46,8 @@ const User = () => {
 
   const checkDate = () => {
     if (userFullInfos?.next_click){
-      const hydrateDT = DateTime.fromISO(userFullInfos?.next_click)
-      const dtNow = DateTime.local()
+      const hydrateDT = DateTime.fromISO(userFullInfos?.next_click).toMillis()
+      const dtNow = DateTime.local().toMillis()
       if(dtNow > hydrateDT) {
         setBtnIsDisabled(false)
       } else {
@@ -70,6 +70,8 @@ const User = () => {
       } 
     }
   },[userFullInfos, btnIsDisabled])
+
+  
 
 
   return (
