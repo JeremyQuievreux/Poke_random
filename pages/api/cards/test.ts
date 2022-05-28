@@ -29,7 +29,7 @@ export default function handler(req: NextApiRequest,res: NextApiResponse<Data>) 
 
                 const hydrateDT = DateTime.local().plus({hours:1})
 
-                const new_next_click = hydrateDT.toFormat('yyyy-MM-dd HH:mm:ss')                
+                const new_next_click = hydrateDT.toISO()
 
                 console.log(new_next_click);
                 if(err){

@@ -7,17 +7,16 @@ import styles from '../styles/pages/Profil.module.scss'
 
 import { GlobalContext } from '../context/GlobalContext'
 
+import {DateTime} from 'luxon'
+
 const User = () => {
-  
-  const { userFullInfos, checkLocalStorage } = useContext(GlobalContext)
   
   const [ btnIsDisabled, setBtnIsDisabled ] = useState(true)
   
+  const { userFullInfos, checkLocalStorage } = useContext(GlobalContext)
+  
   const alreadyGotCards = userFullInfos?.cardsList.filter((card) => card.quantity > 0)
-  
-  console.log(userFullInfos?.next_click);
-  
-
+    
   const getRandomCard = () => {
     console.log("j'ai cliqué")
     const localToken = localStorage.getItem('@pkm-cnc')
@@ -31,6 +30,22 @@ const User = () => {
       checkLocalStorage()
     })
   }
+
+  const checkDate = () => {
+    if (userFullInfos?.next_click){
+      const hydrateDT = DateTime.fromISO(userFullInfos?.next_click)
+      const dtNow = DateTime.local()
+      if(dtNow > hydrateDT) {
+        setBtnIsDisabled(false)
+      } else {
+        setBtnIsDisabled(true)
+      }
+    }
+  }
+
+  useEffect(()=> {
+    checkDate()
+  },[userFullInfos])
 
   return (
     <div className={styles.profil_container}>

@@ -35,7 +35,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     } else {
         
         dbConnect()
-        const next_click = DateTime.now().toFormat("yyyy-MM-dd'T'HH:mm:ss")
+        const next_click = DateTime.now().toISO()
         
         //verifie que le pseudo n'existe pas déjà
         UserModel.findOne({ pseudo: pseudo }, (err: string, user :{}) => {
