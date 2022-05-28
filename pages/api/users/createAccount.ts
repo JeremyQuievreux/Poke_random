@@ -24,7 +24,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
     
     
-    const { pseudo, mail, mailConfirm, password, next_click } = req.body;
+    const { pseudo, mail, mailConfirm, password } = req.body;
     
     /* if (pseudo === " " || mail === " " || password === " " || mailConfirm === " ") {
         res.status(200).send({error: true, message: "Veuillez remplir tous les champs"})
@@ -35,6 +35,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     } else {
         
         dbConnect()
+        const next_click = DateTime.now().toISO()
         
         //verifie que le pseudo n'existe pas déjà
         UserModel.findOne({ pseudo: pseudo }, (err: string, user :{}) => {

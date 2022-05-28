@@ -7,7 +7,6 @@ import  UserModel from '../../../models/User'
 import  PokemonModel from '../../../models/Pokemon'
 import TransactionModel from '../../../models/Transaction'
 
-
 type Data = {
     error: boolean,
     message: string|number,
