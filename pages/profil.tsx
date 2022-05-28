@@ -57,13 +57,19 @@ const User = () => {
   }
 
   useEffect(()=> {
-    const interval = setInterval(() => {
-      checkDate()
-      console.log("truc");
-      
-    },1000)
-    return () => clearInterval(interval)
-  },[userFullInfos])
+    if (userFullInfos?.next_click){
+      const hydrateDT = DateTime.fromISO(userFullInfos?.next_click)
+      const dtNow = DateTime.local()
+      if(dtNow < hydrateDT) {
+        const interval = setInterval(() => {
+          checkDate()
+          console.log("truc");
+          
+        },1000)
+        return () => clearInterval(interval)
+      } 
+    }
+  },[userFullInfos, btnIsDisabled])
 
 
   return (
