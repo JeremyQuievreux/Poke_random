@@ -16,6 +16,8 @@ const User = () => {
   const { userFullInfos, checkLocalStorage } = useContext(GlobalContext)
   
   const alreadyGotCards = userFullInfos?.cardsList.filter((card) => card.quantity > 0)
+
+  const [ countdown, setCountdown ] = useState({hours: 0, minutes: 0, seconds: 0})
     
   const getRandomCard = () => {
     console.log("j'ai cliqué")
@@ -31,6 +33,17 @@ const User = () => {
     })
   }
 
+  const decrementCountdown = () => {
+    if (userFullInfos?.next_click) {
+      const hydrateDT = DateTime.fromISO(userFullInfos?.next_click).toMillis()
+      const dtNow = DateTime.local().toMillis()
+      if(dtNow < hydrateDT) {
+        console.log(hydrateDT - dtNow);
+        
+      }
+    }
+  }
+
   const checkDate = () => {
     if (userFullInfos?.next_click){
       const hydrateDT = DateTime.fromISO(userFullInfos?.next_click)
@@ -44,8 +57,14 @@ const User = () => {
   }
 
   useEffect(()=> {
-    checkDate()
+    const interval = setInterval(() => {
+      checkDate()
+      console.log("truc");
+      
+    },1000)
+    return () => clearInterval(interval)
   },[userFullInfos])
+
 
   return (
     <div className={styles.profil_container}>
