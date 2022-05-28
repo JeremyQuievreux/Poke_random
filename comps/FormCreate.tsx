@@ -1,8 +1,10 @@
 //import de base
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 //import styles
 import styles from '../styles/comps/FormCreate.module.scss'
+
+import { DateTime } from 'luxon'
 
 import { CreateUserType } from '../types/CreateUserType'
 //typage des props
@@ -13,7 +15,7 @@ type FormCreateProps = {
 //Component
 const FormCreate = ({setLoginState}: FormCreateProps) => {
     //state
-    const [ user, setUser ] = useState<CreateUserType>({pseudo: "", mail: "", mailConfirm: "", password: ""})
+    const [ user, setUser ] = useState<CreateUserType>({pseudo: "", mail: "", mailConfirm: "", password: "", next_click:""})
     const [ errorMessage, setErrorMessage] = useState<string|null>(null)
     const [ successMessage, setSuccessMessage] = useState<string|null>(null)
     //methode pour update le state onChange des inputs
@@ -23,11 +25,12 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
     //methode pour envoyer le formulaire
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        
         axios.post("/api/users/createAccount", user)
             .then(res => {
                 if(res.data.error === false){
                     setSuccessMessage(res.data.message)
-                    setUser({pseudo: "", mail: "", mailConfirm: "", password: ""})
+                    setUser({pseudo: "", mail: "", mailConfirm: "", password: "", next_click:""})
                     setTimeout(() => {
                         setSuccessMessage(null)
                         setLoginState("login")
@@ -40,6 +43,11 @@ const FormCreate = ({setLoginState}: FormCreateProps) => {
                 }
             })
     }
+
+    useEffect(()=>{
+        const dtNow = DateTime.local().toISO()
+        setUser({...user, next_click: dtNow})
+    },[])
   return (
     <div className={styles.form_container}>
         <h2>Création de compte</h2>
