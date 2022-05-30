@@ -59,7 +59,7 @@ const Collection = () => {
             <option value="all">Toutes les cartes</option>
             <option value="mine">Mes cartes</option>
             <option value="duplicate">Mes doubles</option>
-            <option value="missing">Les cartes qu'il me manque</option>
+            <option value="missing">Les cartes qu&apos;il me manque</option>
           </select>
         </div>
       </div>
