@@ -52,24 +52,17 @@ const Collection = () => {
     
   return (
     <div className={styles.collection_container}>
-        <div className={styles.radio_btn_block} onChange={(e) => handleRadioChange(e)}>
-          <div className={styles.radio_line}>
-            <input type="radio" name="seeing" id="all" value="all" defaultChecked={whatToSee === "all"}/>
-            <label> Toutes les cartes </label>
-          </div>
-          <div className={styles.radio_line}>
-            <input type="radio" name="seeing" id="mine" value="mine" defaultChecked={whatToSee === "mine"}/>
-            <label> Mes cartes </label>
-          </div>
-          <div className={styles.radio_line}>
-            <input type="radio" name="seeing" id="duplicate" value="duplicate" defaultChecked={whatToSee === "duplicate"}/>
-            <label> Mes doubles </label>
-          </div>
-          <div className={styles.radio_line}>
-            <input type="radio" name="seeing" id="duplicate" value="missing" defaultChecked={whatToSee === "missing"}/>
-            <label> Cartes manquantes </label>
-          </div>
+      <div className={styles.filter_bar}>
+        <div className={styles.filter}>
+          <label htmlFor="see">Je veux voir : </label>
+          <select name="see" id="see" onChange={(e)=>handleRadioChange(e)}>
+            <option value="all">Toutes les cartes</option>
+            <option value="mine">Mes cartes</option>
+            <option value="duplicate">Mes doubles</option>
+            <option value="missing">Les cartes qu'il me manque</option>
+          </select>
         </div>
+      </div>
         <div className={styles.cards_container}>
           {cardsToSee.length >= 1 ?
               cardsToSee?.map((cardAndQuantity, index) => {

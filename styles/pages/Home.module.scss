@@ -6,4 +6,24 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    h2{
+        margin: 20px;
+    }
+    .home_block{
+        width: 50%;
+        border-top: 2px solid $primary;
+        text-align: justify;
+        h4{
+            font-style: italic;
+            text-decoration: underline;
+            margin: 10px;
+        }
+        p{
+            margin: 10px;
+        }
+        .home_signature{
+            text-align: right;
+            font-weight: bold;
+        }
+    }
 }
