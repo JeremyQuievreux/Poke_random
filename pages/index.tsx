@@ -32,11 +32,11 @@ const Home: NextPage = () => {
       <h2>Bienvenue sur Pokemon Click'n'Collect</h2>
       <div className={styles.home_block}>
         <h4>Qu'est ce que Pokemon Click'n'Collect ?</h4>
-        <p>- Le site a pour but de vous permettre de vous amuser à completer une collection virtuelle de cartes Pokemon (le PokéCardex).</p>
+        <p>- Le site a pour but de vous permettre de vous amuser à completer une collection virtuelle de cartes Pokemon &#40;le PokéCardex&#41;.</p>
       </div>
       <div className={styles.home_block}>
         <h4>Comment faire pour avoir de cartes ?</h4>
-        <p>- En vous connectant régulierement vous pouvez obtenir une carte aléatoire parmis toute la collection (151 cartes)</p>
+        <p>- En vous connectant régulierement vous pouvez obtenir une carte aléatoire parmis toute la collection &#40;151 cartes&#41;</p>
         <p>- En les achetants dans la boutique avec vos PokéCoins, qui est la monnaie virtuelle de Pokemon Click'N'Collect</p>
       </div>
       <div className={styles.home_block}>
