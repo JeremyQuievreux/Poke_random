@@ -31,12 +31,12 @@ const Home: NextPage = () => {
       </Head>
       <h2>Home</h2>
       <h3>Work in progress ... </h3>
-      {userIsLogged &&
+      {/* {userIsLogged &&
       <>
       <p><button onClick={() => GetRandomCard()}>Get 1 Random Card</button> &laquo;-----Bouton de test</p>   
       <p>A chaque click un pokemon random sera ajouté a la collection</p>
       </>
-      }
+      } */}
     </div>
   )
 }

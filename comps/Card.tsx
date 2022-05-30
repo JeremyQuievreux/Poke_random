@@ -7,6 +7,7 @@ import { setBGColor } from '../utils/BGColorFunction';
 import { setPKBColor } from '../utils/PKBColor';
 //type
 import { PokemonType } from '../types/PokemonType';
+import Image from 'next/image';
 
 type CardComponantProps = {
     card: PokemonType,
@@ -26,7 +27,7 @@ const Card = ({card}:CardComponantProps) => {
                 </div>
                 <div className={styles.card_body}>
                     <MdCatchingPokemon className={styles.rarity_icon} style={{color: setPKBColor(card.rarity)}}/>
-                    <img src={card.picURL} width={200} height={200} />
+                    <Image src={card.picURL} width={200} height={200} />
                 </div>
                 <div className={styles.card_typeline}>
                     {card.type.map((type, index) => {

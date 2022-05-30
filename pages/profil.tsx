@@ -23,7 +23,7 @@ const User = () => {
     console.log("j'ai cliqué")
     const newNext_click = DateTime.local().plus({hours: 1}).toISO()
     const localToken = localStorage.getItem('@pkm-cnc')
-    axios.get(`/api/cards/test`, {
+    axios.get(`/api/cards/getRandomCard`, {
       headers: {
         'Authorization': `Bearer ${localToken}`
       },
@@ -32,6 +32,7 @@ const User = () => {
       }
       })
     .then((res) => {
+      setBtnIsDisabled(true)
       console.log(res.data);
       checkLocalStorage()
     })

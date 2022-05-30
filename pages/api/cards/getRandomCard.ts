@@ -40,11 +40,13 @@ const setPokemonArrayIndex = (pokemons:any) => {
     return index
 }
 
-const lafonction = (res: NextApiResponse<Data>, rarity: string, user:UserType) => {
+const lafonction = (res: NextApiResponse<Data>, rarity: string, user:UserType, new_next_click:any) => {
     PokemonModel.find({rarity: rarity}, (err: any, pokemons: any) => {
         if (err) {
             res.status(200).send({error: true, message: 'No Pokemon Found'});
         } else {
+            console.log("dans la fonction : " + new_next_click);
+            
             // chiffre random par rapport a l'array des pokemons d'une certaine rareté
             const randomIndex = setPokemonArrayIndex(pokemons)
             // pokemon random
@@ -69,7 +71,7 @@ const lafonction = (res: NextApiResponse<Data>, rarity: string, user:UserType) =
             // tri de la liste des cards du user par ordre croissant du dex_number
             const orderedList = tempList.sort((a, b) => (a.dex_number > b.dex_number) ? 1 : -1)
             //update du profil du user
-            UserModel.updateOne({_id: user._id }, {cardsList: orderedList}, (err: any) => {
+            UserModel.updateOne({_id: user._id }, {cardsList: orderedList, next_click:new_next_click}, (err: any) => {
               if(!err){
                   //si pas d'erreur ajout d'une transaction dans la bdd
                     TransactionModel.create({
@@ -90,6 +92,9 @@ const lafonction = (res: NextApiResponse<Data>, rarity: string, user:UserType) =
 
 export default function handler(req: NextApiRequest,res: NextApiResponse<Data>) {
     const token = req.headers.authorization?.split(' ')[1];
+    const new_next_click = req.query.next_click
+
+    
 
     jwt.verify(token, process.env.JWT_SECRET, (err: any, decoded: any) => {
         if (err) {
@@ -103,16 +108,16 @@ export default function handler(req: NextApiRequest,res: NextApiResponse<Data>) 
                     //random number between 1 and 10
                     const rarity = Math.floor(Math.random() * (10 - 1 + 1)) + 1
                     if (rarity >= 1 && rarity <= 4) {
-                        lafonction(res, "Commune", user)
+                        lafonction(res, "Commune", user, new_next_click)
                         
                     } else if (rarity >= 5 && rarity <= 7) {
-                        lafonction(res, "Peu Commune", user)
+                        lafonction(res, "Peu Commune", user, new_next_click)
                         
                     } else if (rarity >= 8 && rarity <= 9) {
-                        lafonction(res, "Rare", user)
+                        lafonction(res, "Rare", user, new_next_click)
 
                     } else if (rarity === 10) {
-                        lafonction(res, "Légendaire", user)
+                        lafonction(res, "Légendaire", user, new_next_click)
                     }
                 }
             })
