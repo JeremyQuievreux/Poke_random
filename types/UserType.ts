@@ -8,4 +8,5 @@ export type UserType = {
     pokeCoin: number;
     cardsList: CardType[];
     next_click: string;
+    bonus_click: number;
   }

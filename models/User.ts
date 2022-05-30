@@ -16,7 +16,8 @@ const UserSchema = new mongoose.Schema<UserType>({
   isAdmin: { type: Boolean, default: false },
   pokeCoin: { type: Number, default: 1000 },
   cardsList: [CardsListSchema],
-  next_click: { type: String}
+  next_click: { type: String},
+  bonus_click: { type: Number, default: 0 },
 });
 // 3. Create a Model.
 export default mongoose.models.User || mongoose.model<UserType>('User', UserSchema);

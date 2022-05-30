@@ -9,4 +9,5 @@ export type UserInfosType = {
     pokeCoin: number | any,
     cardsList: [CollectionLineType],
     next_click: string,
+    bonus_click: number,
 }
