@@ -20,7 +20,7 @@ const BuyBtn = ({card}:SellBtnProps) => {
 
   return (
     <div className={styles.sell_line}>
-        <p>{card.card.price} <BsCoin/></p>
+        <p>{card.card.price / 2} <BsCoin/></p>
         <button onClick={()=> {
             setShowSellCardModal(true);
             setSellCardModalInfos({cardID: card.card._id, cardName: card.card.name, cardPrice: card.card.price, userID: userFullInfos?._id, userCoin: userFullInfos?.pokeCoin})

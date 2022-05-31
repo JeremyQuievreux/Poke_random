@@ -34,7 +34,7 @@ export default function handler(req: NextApiRequest,res: NextApiResponse<Data>) 
     if (pokemonCard) {
       UserModel.findById(userID, (err: any, user: any) => {
         if(user){
-            const newPokeCoin = user.pokeCoin + pokemonCard.price
+            const newPokeCoin = user.pokeCoin + (pokemonCard.price / 2)
             const tempList: test[] = user.cardsList
             const index = tempList.findIndex(cardline => cardline.dex_number == pokemonCard.dex_number)
               tempList[index].quantity -= 1
