@@ -1,5 +1,5 @@
 //Base
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from '../styles/comps/BuyCardModal.module.scss'
 import axios from 'axios';
 //Context
@@ -7,6 +7,7 @@ import { SellCardModalContext } from '../context/SellCardModalContext';
 import { GlobalContext } from '../context/GlobalContext';
 
 const SellCardModal = () => {
+    const [ btnIsDisabled, setBtnIsDisabled ] = useState(false);
     //Context
     const { setShowSellCardModal, sellCardModalInfos } = useContext(SellCardModalContext);
 
@@ -31,11 +32,13 @@ const SellCardModal = () => {
                     <p>Voulez vous vendre cette carte de {sellCardModalInfos.cardName} ?</p>
                 </div>
                 <div className={styles.modal_footer}>
-                    <button onClick={() => {
+                    <button disabled={btnIsDisabled} onClick={() => {
                         sellCard(sellCardModalInfos.cardID, sellCardModalInfos.userID)
+                        setBtnIsDisabled(true)
                         setTimeout(() => {
                             setShowSellCardModal(false)
-                        },1500)
+                            setBtnIsDisabled(false)
+                        },1000)
                     }}>OUI</button>
                     <button onClick={() => {
                         setShowSellCardModal(false)
