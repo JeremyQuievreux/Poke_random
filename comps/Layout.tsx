@@ -13,6 +13,7 @@ import { GlobalContext } from '../context/GlobalContext'
 //comps
 import BuyCardModal from './BuyCardModal'
 import SellCardModal from './SellCardModal'
+import RandomCardModal from './RandomCardModal'
 //propstype
 type LayoutProps = {
     children: React.ReactNode,
@@ -24,10 +25,11 @@ const Layout = ({children}: LayoutProps) => {
     const { showBuyCardModal } = useContext(BuyCardModalContext)
     const { showSellCardModal } = useContext(SellCardModalContext)
 
-    const { userIsLogged } = useContext(GlobalContext)
+    const { userIsLogged, showGetRandomCardModal } = useContext(GlobalContext)
 
     return (
         <div className='main-container'>
+            {showGetRandomCardModal && <RandomCardModal />}
             {showBuyCardModal && <BuyCardModal/>}
             {showSellCardModal && <SellCardModal/>}
             {isLogModalOpen && <LogModal/>}

@@ -78,12 +78,12 @@ const lafonction = (res: NextApiResponse<Data>, rarity: string, user:UserType) =
                     TransactionModel.create({
                     userID: user._id,
                     userName: user.pseudo,
-                    type: "random",
+                    type: "bonus",
                     cardID: randomPokemon._id,
                     cardName: randomPokemon.name
                 })
                 .then(() => {
-                  res.send({error: false, message:"Card added to user's collection"})
+                  res.send({error: false, message:"Card added to user's collection", data: randomPokemon})
                 })
               }
             })

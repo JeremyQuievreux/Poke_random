@@ -18,6 +18,8 @@ import { BuyCardModalInfosType } from '../types/BuyCardModalInfosType'
 
 import { SellCardModalInfosType } from '../types/SellCardModalInfosType'
 
+import { PokemonType } from '../types/PokemonType'
+
 import { UserInfosType } from '../types/UserInfosType'//<-use
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -33,6 +35,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   //reforge
   const [ userIsLogged, setUserIsLogged ] = useState<boolean>(false)
   const [ userFullInfos, setUserFullInfos ] = useState<UserInfosType|null>(null)
+
+  const [ showGetRandomCardModal, setShowGetRandomCardModal ] = useState<boolean>(false)
+  const [ randomCardModalInfos, setRandomCardModalInfos ] = useState<PokemonType|null>(null)
 
   const getUserInfos = (localToken:string) => {
     console.log("je recherche les infos");
@@ -70,7 +75,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     setUserIsLogged,
     userFullInfos,
     setUserFullInfos,
-    checkLocalStorage
+    checkLocalStorage,
+    showGetRandomCardModal,
+    setShowGetRandomCardModal,
+    randomCardModalInfos,
+    setRandomCardModalInfos,
   }
 
   //end reforge

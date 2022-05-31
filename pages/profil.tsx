@@ -15,7 +15,7 @@ const User = () => {
   
   const [ btnIsDisabled, setBtnIsDisabled ] = useState(true)
   
-  const { userFullInfos, checkLocalStorage } = useContext(GlobalContext)
+  const { userFullInfos, checkLocalStorage, setShowGetRandomCardModal, setRandomCardModalInfos} = useContext(GlobalContext)
   
   const alreadyGotCards = userFullInfos?.cardsList.filter((card) => card.quantity > 0)
 
@@ -33,8 +33,11 @@ const User = () => {
       })
     .then((res) => {
       setBtnIsDisabled(true)
-      console.log(res.data);
       checkLocalStorage()
+      setShowGetRandomCardModal(true)
+      setRandomCardModalInfos(res.data.data)      
+      console.log(res.data.data);
+
     })
   }
 
@@ -47,8 +50,11 @@ const User = () => {
       }
     })
     .then((res) => {
-      console.log(res.data);
       checkLocalStorage()
+      setShowGetRandomCardModal(true)
+      setRandomCardModalInfos(res.data.data)      
+      console.log(res.data.data);
+      
     })
   }
 

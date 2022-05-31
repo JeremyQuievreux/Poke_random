@@ -82,7 +82,7 @@ const lafonction = (res: NextApiResponse<Data>, rarity: string, user:UserType, n
                     cardName: randomPokemon.name
                 })
                 .then(() => {
-                  res.send({error: false, message:"Card added to user's collection"})
+                  res.send({error: false, message:"Card added to user's collection", data: randomPokemon})
                 })
               }
             })
