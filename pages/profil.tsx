@@ -40,6 +40,16 @@ const User = () => {
 
   const getBonusRandomCard = () => {
     console.log("j'ai cliqué")
+    const localToken = localStorage.getItem('@pkm-cnc')
+    axios.get(`/api/cards/getBonusRandomCard`, {
+      headers: {
+        'Authorization': `Bearer ${localToken}`
+      }
+    })
+    .then((res) => {
+      console.log(res.data);
+      checkLocalStorage()
+    })
   }
 
 
