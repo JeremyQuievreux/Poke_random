@@ -1,13 +1,14 @@
 @import '../colors.scss';
 
 .home_container{
-    height: calc(100vh - 198px);
+    min-height: calc(100vh - 146px );
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     h2{
         margin: 20px;
+        text-align: center;
     }
     .home_block{
         width: 50%;
@@ -24,6 +25,22 @@
         .home_signature{
             text-align: right;
             font-weight: bold;
+        }
+    }
+}
+
+@media (max-width: 800px){
+    .home_container{
+        .home_block{
+            width: 75%;
+        }
+    }
+}
+
+@media (max-width: 500px){
+    .home_container{
+        .home_block{
+            width: 90%;
         }
     }
 }
